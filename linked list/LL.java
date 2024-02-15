@@ -177,14 +177,14 @@ public class LL{
 			ans.insertLast(s.value);
 			s = s.next;
 		}
-		return ans.next;
+		return ans.head;
 
 	}
 	 public Node merge(Node list1, Node list2) {
-        Node ans = new Node();
-        Node tail = ans;
+        LL ans = new LL();
+        Node tail = ans.tail;
 		while(list1 != null && list2 != null){
-			if(list1.val < list2.val){
+			if(list1.value < list2.value){
 				tail.next = list1;
                 tail = list1;
 				list1 = list1.next;
@@ -207,7 +207,7 @@ public class LL{
                 tail = list2;
 				list2 = list2.next;
 		}
-		return ans.next;
+		return ans.head;
         
     }
 
@@ -270,7 +270,7 @@ public class LL{
     	return fast;
     }
 
-    //finding the middle node by using just one loop
+    // finding the middle node by using just one loop
     // leet code 876
     // https://leetcode.com/problems/middle-of-the-linked-list/description/
 
@@ -296,26 +296,65 @@ public class LL{
 
     	return temp;
     }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    void reverse2(Node n){
+    	tail = reversetail(n);
+    	tail.next = null;
+    }
+
+
+    private Node reversetail(Node n){
+    	if(n.next == null){
+    		head = n;
+    		return n;
+    	}
+    	Node temp = reversetail(n.next);
+    	temp.next = n;
+    	return n; 
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    void reverse(Node n){ // This reverse can also be done no need to creat another function
+    	if(n.next == null){
+    		head = n;
+    		return;
+    	}
+    	reverse(n.next);
+    	tail.next = n;
+    	tail = n;
+    	tail.next = null; 
+    }
+
+    Node reversetal(Node n){ // This reverse can also be done no need to creat another function
+    	if(n.next == null){
+    		head = n;
+    		return n;
+    	}
+    	tail = reversetail(n.next);
+    	tail.next = n;
+    	tail = n;
+    	tail.next = null; 
+    	return n; 
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(2);
 		list.insertLast(3);
 		list.insertLast(3);
-		// list.insertLast(5);
-		// list.insertLast(6);
-		// list.insertLast(6);
-		// list.insert(55,2);
-		// list.Display();
-		// list.removeDuplicates();
-		// list.Display();
+		list.insertLast(5);
+		list.insertLast(6);
+		list.insertLast(6);
+		list.insert(55,2);
+		list.Display();
+		list.removeDuplicates();
+		list.Display();
 		
 
-		LL list2 = new LL();
-		list2.insertLast(1);
-		list2.insertLast(4);
-		list2.insertLast(5);
-		//LL ans = merge(list2, list);
-		list.Display(); list2.Display(); 
-		// ans.Display(); 
+		list.reverse(list.head);
+		list.Display();
 	}
 }

@@ -88,7 +88,7 @@ class LL2{
 	}
 
 
-	 public static Node mergeTwoLists(Node list1, Node list2) {
+	 public Node mergeTwoLists(Node list1, Node list2) {
         LL2 ans = new LL2();
         Node tail = ans.tail;
         Node head = ans.head;
@@ -115,10 +115,90 @@ class LL2{
                 tail = list2;
 				list2 = list2.next;
 		}
-		display();
         return head.next;
         
     }
+
+
+    boolean hasCycle(Node head){
+    	Node slow = head; 
+    	Node fast = head; 
+    	while(fast != null && fast.next != null){
+    		if(fast == slow){
+    			return true;
+    		}
+    		slow = slow.next;
+    		fast = fast.next.next;
+    	}
+    	return false;
+    }
+
+    int size(Node head){
+    	Node temp = head;
+    	int size = 0;
+    	while(temp != null){
+    		size++;
+    		temp = temp.next;
+    	}
+    	return size;
+    }
+
+    int get(int index){
+    	Node temp = head;
+    	for(int i = 0;i<= index;i++){
+    		temp = temp.next;
+    	}
+    	return temp.value;
+    }
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------
+
+    void reverse(Node n){
+    	tail = reversetail(n);
+    	tail.next = null;
+    }
+
+
+    private Node reversetail(Node n){
+    	if(n.next == null){
+    		head = n;
+    		return n;
+    	}
+    	Node temp = reversetail(n.next);
+    	temp.next = n;
+    	return n; 
+    }
+
+
+    Node reversetal(Node n){ // This reverse can also be done no need to creat another function
+    	if(n.next == null){
+    		head = n;
+    		return n;
+    	}
+    	tail = reversetal(n.next);
+    	tail.next = n;
+    	tail = n;
+    	tail.next = null; 
+    	return n; 
+    }
+
+
+    void IterativeRecursion(Node head){
+    	Node temp = head; 
+    	Node prev = null;
+    	while(temp != null){
+    		Node n = temp.next; 
+    		temp.next = prev; 
+    		prev = temp; 
+    		temp = n;
+    		display();
+    		head = temp;
+    	}
+    }
+	// -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 	void display(){
 		Node temp = head; 
@@ -143,24 +223,22 @@ class LL2{
 		list.insertLast(2);
 		list.insertLast(2);
 
-		list.insertLast(11);
+		// list.insertLast(11);
+		// list.display();
+
+		// System.out.println(list.size);
+
+
+		// list.removeDuplicates();
+		// list.display();
+
+		// System.out.println(list.size);
+		System.out.println(list.head.value);
 		list.display();
 
-		System.out.println(list.size);
-
-
-		list.removeDuplicates();
+		list.IterativeRecursion(list.head);
+		// System.out.println(list.head.value);
 		list.display();
-
-		System.out.println(list.size);
-		LL2 list2 = new LL2();
-		list2.insertLast(10);
-
-		list2.insertFirst(3);
-		list2.insertFirst(4);
-		list2.insertFirst(5);
-
-		mergeTwoLists(list.head, list2.head);
 
 
 	}
