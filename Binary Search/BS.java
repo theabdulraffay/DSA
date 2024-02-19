@@ -331,6 +331,7 @@ public class BS{
 	// https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/
 	// https://leetcode.com/problems/arranging-coins/description/
 	// https://leetcode.com/problems/koko-eating-bananas/description/
+	// https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/
     public boolean isPerfectSquare(int num) {
         // int k =(int) Math.sqrt(num);
         // return k*k == num;

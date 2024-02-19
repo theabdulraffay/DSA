@@ -327,6 +327,8 @@ public class LL{
     	tail.next = null; 
     }
 
+    // https://leetcode.com/problems/reverse-linked-list/
+    // https://leetcode.com/problems/reverse-linked-list-ii/description/
     Node reversetal(Node n){ // This reverse can also be done no need to creat another function
     	if(n.next == null){
     		head = n;
@@ -337,6 +339,69 @@ public class LL{
     	tail = n;
     	tail.next = null; 
     	return n; 
+    }
+
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    void IterativeRecursion(Node head){
+    	Node temp = head; 
+    	Node prev = null;
+    	while(temp != null){
+    		Node n = temp.next; 
+    		temp.next = prev; 
+    		prev = temp; 
+    		temp = n;
+    	}
+
+
+
+    	// Node temp = head;
+    	// Node prev = null; 
+    	// Node next = temp.next; 
+    	// while(temp != null){
+    	// 	temp.next = prev; 
+    	// 	prev = temp; 
+    	// 	temp = next;
+		// 	if(next != null){
+    	// 		next = next.next; 
+		// 	}    		
+    	// }
+
+    	// return prev; if return type is Node. 
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    
+
+    public Node reverseBetween(Node head, int left, int right) {
+        if(left == right){
+            return head;
+        }
+        Node current = head;
+        Node prev = null;
+        for(int i = 0;current != null && i<left - 1;i++){
+            prev = current;
+            current = current.next;
+        }
+        Node newEnd = current;
+        Node last = prev;
+        Node next = current.next;
+        for(int i = 0;current != null && i< right - left + 1;i++){
+            current.next = prev;
+            prev = current;
+            current = next;
+            if(next != null){
+                next = next.next;
+            }
+        }
+        if(last != null){
+            last.next = prev;
+        }else{
+            head = prev;
+        }
+        newEnd.next = current;
+        return head ;
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
