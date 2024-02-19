@@ -344,7 +344,7 @@ public class LL{
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
-    void IterativeRecursion(Node head){
+    Node IterativeRecursion(Node head){
     	Node temp = head; 
     	Node prev = null;
     	while(temp != null){
@@ -353,6 +353,7 @@ public class LL{
     		prev = temp; 
     		temp = n;
     	}
+    	return prev;
 
 
 
@@ -372,8 +373,8 @@ public class LL{
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
-    
 
+    // https://leetcode.com/problems/reverse-linked-list-ii/
     public Node reverseBetween(Node head, int left, int right) {
         if(left == right){
             return head;
@@ -405,6 +406,39 @@ public class LL{
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+    public boolean isPalindrome(Node head) {
+        // Node fast = head;
+        // Node slow = head;
+        // while(fast != null && fast.next != null){
+        //     fast = fast.next.next;
+        //     slow = slow.next;
+        // }
+
+        // Node previous = null;
+        // Node next = slow.next;
+        // while(slow != null){
+        //     slow.next = previous;
+        //     previous = slow;
+        //     slow = next;
+        //     if(next != null){
+        //         next = next.next;
+        //     }
+        // }
+
+        Node slow = middleNode(head); // First find the middle node 
+        Node previous = IterativeRecursion(slow); // Then reverse the list from the middle, now two lists will be created, keep comparing both of them the head and the previous, until one of them become null. 
+
+        while(head != null && previous != null){
+            if(head.value != previous.value){
+                return false;
+            }
+            head = head.next;
+            previous = previous.next;
+        }
+        return true;
+    }
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(2);
