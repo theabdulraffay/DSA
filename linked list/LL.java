@@ -103,7 +103,16 @@ public class LL{
 
 
 	}
-	public void Display(){
+	public void display(){
+		Node temp = head;	
+		while(temp != null){
+			System.out.print(temp.value + "->");
+			temp = temp.next;
+		}
+		System.out.println("END");
+	}
+
+	public void display(Node head){
 		Node temp = head;	
 		while(temp != null){
 			System.out.print(temp.value + "->");
@@ -407,7 +416,7 @@ public class LL{
     // -------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+    // https://leetcode.com/problems/palindrome-linked-list/
     public boolean isPalindrome(Node head) {
         // Node fast = head;
         // Node slow = head;
@@ -439,21 +448,56 @@ public class LL{
         }
         return true;
     }
-	public static void main(String[] args) {
-		LL list = new LL();
-		list.insertLast(2);
-		list.insertLast(3);
-		list.insertLast(3);
-		list.insertLast(5);
-		list.insertLast(6);
-		list.insertLast(6);
-		list.insert(55,2);
-		list.Display();
-		list.removeDuplicates();
-		list.Display();
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    // https://leetcode.com/problems/reorder-list/description/
+    void reorder(Node head){// This function will rearrange nodes alternatively between first node and last node for example 1->2->3->4->5->6->7 become 1->7->2->6->3->5->4
+    	Node fast = head;
+    	Node slow = head;
+    	while(fast.next !=null && fast.next.next != null){
+    		fast = fast.next.next;
+    		slow = slow.next;
+    	}
+    	Node temp = slow.next;
+    	slow.next = null;
+		Node previous = null;
+		Node current = temp; 
+		Node next = current.next; 
+		while(current != null){
+			current.next = previous;
+			previous = current;
+			current = next;
+			if(next != null){
+				next = next.next;
+			}
+		}
+		// display(previous);
+		// display(head);
+		Node arzy = head; 
+		while(previous != null){// as this previous node will always be equal or smaller than the head node, so we only take previous in the while loop as it satisfy both for head and previous itself
+			Node t = arzy.next; 
+			Node m = previous.next;
+			arzy.next = previous;
+			previous.next = t;
+			arzy = t;
+			previous = m;
+		}
+		// display();
 		
 
-		list.reverse(list.head);
-		list.Display();
+    }
+	public static void main(String[] args) {
+		LL list = new LL();
+		list.insertLast(1);
+		list.insertLast(2);
+		list.insertLast(3);
+		list.insertLast(4);
+		list.insertLast(5);
+		list.insertLast(6);
+		list.insertLast(7);
+		//list.reorder(list.head);
+		
 	}
 }
