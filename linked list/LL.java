@@ -485,8 +485,50 @@ public class LL{
 			previous = m;
 		}
 		// display();
-		
+    }
 
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/rotate-list/
+    Node getLast(Node head) {
+    	Node temp = head; 
+    	while(temp.next.next != null){
+    		temp = temp.next;
+    	}
+    	return temp; 
+    }
+
+    int length(Node head){
+        int c = 0;
+        Node temp = head;
+        while(temp != null){
+            temp = temp.next;
+            c++;
+        }
+        return c;
+    }
+
+    void rotating(int k){
+    	if(head == null || head.next == null)return;
+        int size = length(head);
+        k = k%size;
+    	for(int i=0; i<k; i++){
+    		Node temp = getLast(head);
+    	    Node temp2 = temp.next; 
+    	    temp.next = null; 
+    	    temp2.next = head; 
+    	    head = temp2;
+    	}
+    	display(head);
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+    void reverseKnodes(Node head, int k){// This function will rverse every k nodes in a LL
+    	Node temp = head;
+    	while(temp != null){
+			    		
+    	}
     }
 	public static void main(String[] args) {
 		LL list = new LL();
@@ -497,7 +539,9 @@ public class LL{
 		list.insertLast(5);
 		list.insertLast(6);
 		list.insertLast(7);
-		//list.reorder(list.head);
+		list.display();
+		
+
 		
 	}
 }
