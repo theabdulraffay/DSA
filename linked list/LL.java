@@ -522,6 +522,8 @@ public class LL{
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+    // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/
+    // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
     void reverseKnodes(Node head, int k){// This function will rverse every k nodes in a LL
@@ -530,6 +532,79 @@ public class LL{
 			    		
     	}
     }
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/remove-linked-list-elements/description/
+    public Node removeElements(Node head, int val) {// head = [1,2,6,3,4,5,6], val = 6 // Output: [1,2,3,4,5]
+        Node temp = head;
+        Node prev = null;
+        while(temp!=null){
+            if(prev == null && temp.value == val){
+                head = head.next;
+                temp = temp.next;
+                continue;
+            }
+            else if(temp.value == val){
+                while(temp != null && temp.value == val ){
+                    temp = temp.next;
+                }
+                prev.next = temp;
+                continue;
+                
+            }
+            prev = temp;
+            temp = temp.next;
+        }
+        return head;
+        
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+     boolean yes(Node n, int k) {
+        for (int i = 0; i < k; i++) {
+            if (n == null)
+                return false;
+            n = n.next;
+        }
+        return true;
+    }
+
+    public Node reverseKGroup(Node head, int k) {// This function will reverse every k nodes // head = [1,2,3,4,5], k = 2 // Output: [2,1,4,3,5]
+        Node prev = null;
+        Node last = null;
+        Node temp = head;
+        Node current = head;
+        while (temp != null) {
+            if (yes(temp, k)) { // this check whether the next k node are avalible ot not, because we can only
+                                // swap k nodes, if k nodes are not avalible we donot reverse
+                for (int i = 0; i < k; i++) {
+                    if (temp != null) {
+                        Node n = temp.next;
+                        temp.next = prev;
+                        prev = temp;
+                        temp = n;
+                    }
+                }
+            } else {
+                break;
+            }
+            if (last == null) {
+                head = prev;
+                last = prev;
+            } else {
+                last.next = prev;
+                last = prev;
+            }
+            current.next = temp;
+            last = current;
+            current = temp;
+
+        }
+        return head;
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(1);
