@@ -294,7 +294,9 @@ public class LL{
     	return slow;
     }
 
-    public Node mergeSort(Node head){
+    // https://leetcode.com/problems/insertion-sort-list/description/
+    // https://leetcode.com/problems/sort-list
+    public Node mergeSort(Node head){ 
     	if(head == null || head.next == null){
     		return head;
     	}
@@ -559,7 +561,6 @@ public class LL{
         
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
-    // https://leetcode.com/problems/swap-nodes-in-pairs/
     // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
      boolean yes(Node n, int k) {
         for (int i = 0; i < k; i++) {
@@ -606,7 +607,8 @@ public class LL{
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
-    Node swapInpair(Node head){
+    // https://leetcode.com/problems/swap-nodes-in-pairs/
+    Node swapInpair(Node head){ // Input: head = [1,2,3,4], Output: [2,1,4,3]
     	Node prev = null;
         Node last = null;
         Node temp = head;
