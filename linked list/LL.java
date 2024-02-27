@@ -559,6 +559,7 @@ public class LL{
         
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/swap-nodes-in-pairs/
     // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
      boolean yes(Node n, int k) {
         for (int i = 0; i < k; i++) {
@@ -568,6 +569,7 @@ public class LL{
         }
         return true;
     }
+
 
     public Node reverseKGroup(Node head, int k) {// This function will reverse every k nodes // head = [1,2,3,4,5], k = 2 // Output: [2,1,4,3,5]
         Node prev = null;
@@ -604,7 +606,29 @@ public class LL{
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
-
+    Node swapInpair(Node head){
+    	Node prev = null;
+        Node last = null;
+        Node temp = head;
+        Node current = head;
+        while (current != null) {
+            for (int i = 0; i < 2 && temp != null; i++) {
+                Node n = temp.next;
+                temp.next = prev;
+                prev = temp;
+                temp = n;
+            }
+            if (last != null) {
+                last.next = prev;
+            } else {
+                head = prev;
+            }
+            current.next = temp;
+            last = current;
+            current = temp;
+        }
+        return head;
+    }
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(1);
