@@ -143,8 +143,10 @@ public class LL{
 
 
 	}
-
+    // -------------------------------------------------------------------------------------------------------------------------------------------
 	//leetcode 0083
+	// https://leetcode.com/problems/remove-duplicates-from-sorted-list
+	// https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii
 	public void removeDuplicates(){ //from sorted list
 		Node n = head; 
 		while(n.next != null){
@@ -158,10 +160,13 @@ public class LL{
 		tail = n;
 		tail.next = null;
 
-	}
+	}    
+
+	// -------------------------------------------------------------------------------------------------------------------------------------------
 
 	//merge
 	//leetcode 0021
+	// https://leetcode.com/problems/merge-two-sorted-lists
 	public static Node merge(LL first, LL second) {
 		Node f = first.head;
 		Node s = second.head;
@@ -220,11 +225,11 @@ public class LL{
         
     }
 
-
+    // -------------------------------------------------------------------------------------------------------------------------------------------
 	//fast and slow pointer
 	//to find cycle in a list
 	//leetcode 141
-
+    // https://leetcode.com/problems/linked-list-cycle/
 	//Both these cycle questions were asked in amazon and microsoft
 	public boolean hasCycle(Node head) {
         Node fast = head;
@@ -258,9 +263,12 @@ public class LL{
         return counter;
     }
 
+    // -------------------------------------------------------------------------------------------------------------------------------------------
 
     //node from where the cycle starts 
     //linked list 142
+    // https://leetcode.com/problems/linked-list-cycle-ii
+    // https://leetcode.com/problems/linked-list-cycle/
     // https://github.com/theabdulraffay/Leetcode-gdsc/tree/main/0142-Linked-List-Cycle-II
 
     public Node detectCycle(Node head){
@@ -279,6 +287,8 @@ public class LL{
     	return fast;
     }
 
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
     // finding the middle node by using just one loop
     // leet code 876
     // https://leetcode.com/problems/middle-of-the-linked-list/description/
@@ -293,7 +303,7 @@ public class LL{
     	}
     	return slow;
     }
-
+    // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/insertion-sort-list/description/
     // https://leetcode.com/problems/sort-list
     public Node mergeSort(Node head){ 
@@ -630,6 +640,37 @@ public class LL{
             current = temp;
         }
         return head;
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/delete-node-in-a-linked-list/
+
+    public void deleteNode(Node node) {// Input: head = [1,2,3,4,5], node = 3; Output: [1,2,4,5]
+    									   // we have to delete the node given, but for deletion we need a predecessor
+                                           // node, as we cannot go back in a Linked List, so we store the value of next
+                                           // node in current node and delete the next node ;) (wink emoji)
+        node.value = node.next.value;
+        node.next  = node.next.next;
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    // https://leetcode.com/problems/odd-even-linked-list/
+    public Node oddEvenList(Node head) { // Input: head = [1,2,3,4,5], Output: [1,3,5,2,4]
+        if (head == null || head.next == null)
+            return head;
+        Node odd = head;
+        Node even = head.next;
+        Node even2 = head.next; // taking this Node because after the loop when odd is at last we have to
+                                    // connect the two node, so we store head.next in a temp variable
+        while (odd.next != null && even.next != null) {
+            odd.next = odd.next.next;
+            odd = odd.next;
+            even.next = even.next.next;
+            even = even.next;
+        }
+        odd.next = even2;
+        return head;
+
     }
 	public static void main(String[] args) {
 		LL list = new LL();
