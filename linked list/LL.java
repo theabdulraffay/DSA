@@ -670,7 +670,30 @@ public class LL{
         }
         odd.next = even2;
         return head;
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
 
+	// https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+    public Node deleteDuplicates(Node head) { // Input: head = [1,2,3,3,4,4,5], Output: [1,2,5]
+        Node prev = null;
+        Node temp = head;
+        while (temp != null && temp.next != null) {
+            if (temp.value == temp.next.value) {
+                do{
+                    temp = temp.next;
+                }while(temp.next != null && temp.value == temp.next.value);
+                temp = temp.next;
+                if (prev != null) {
+                    prev.next = temp;
+                }else{
+                    head = temp;
+                }
+            } else {
+                prev = temp;
+                temp = temp.next;
+            }
+        }
+        return head;
     }
 	public static void main(String[] args) {
 		LL list = new LL();
