@@ -536,6 +536,7 @@ public class LL{
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
     // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
+    // https://leetcode.com/problems/merge-in-between-linked-lists/
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
     void reverseKnodes(Node head, int k){// This function will rverse every k nodes in a LL
@@ -695,6 +696,54 @@ public class LL{
         }
         return head;
     }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+
+    // https://leetcode.com/problems/partition-list/
+    public Node partition(Node head, int x) { // Input: head = [1,4,3,2,5,2], x = 3, Output: [1,2,2,4,3,5]
+        if (head == null || head.next == null)
+            return head;
+        Node odd = head, even = head;
+        while (odd != null) {// This function will find the first node that is smaller than x, then we will
+                             // say this node as head because this is where the LL will start
+            if (odd.value < x)
+                break;
+            odd = odd.next;
+        }
+        while (even != null) {// This function will find the first node that is greater or equal to x, then we
+                              // will keep adding new nodes to this nodes that are greater or equal to this
+                              // one
+            if (even.value >= x)
+                break;
+            even = even.next;
+        }
+        if (odd == null || even == null)
+            return head;// this any of these nodes are null this means the there is no element smaller
+                        // or greater than x so we return list as it is
+        Node newEven = even;// newEven will be the first node greater or equal to x, so after all the
+                                // modiications we connect odd with newEven
+        Node temp = head;
+        head = odd; // as odd is the first node that is smaller than x, so we start the list from
+                    // there sayn it as head
+        while (temp != null) {
+            if (temp == odd || temp == even) {
+                temp = temp.next;
+                continue;
+            } else if (temp.value < x) {
+                odd.next = temp;
+                odd = temp;
+            } else if (temp.value >= x) {
+                even.next = temp;
+                even = temp;
+            }
+            temp = temp.next;
+        }
+        odd.next = newEven;
+        even.next = null;// we make this null to complete(null the tail.next) the list other wise it
+                         // forms a circle
+        return head;
+
+    }
+
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(1);
