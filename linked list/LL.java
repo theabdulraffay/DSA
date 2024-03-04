@@ -538,15 +538,6 @@ public class LL{
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
     // https://leetcode.com/problems/merge-in-between-linked-lists/
     // -------------------------------------------------------------------------------------------------------------------------------------------
-    // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
-    void reverseKnodes(Node head, int k){// This function will rverse every k nodes in a LL
-    	Node temp = head;
-    	while(temp != null){
-			    		
-    	}
-    }
-
-    // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/remove-linked-list-elements/description/
     public Node removeElements(Node head, int val) {// head = [1,2,6,3,4,5,6], val = 6 // Output: [1,2,3,4,5]
         Node temp = head;
