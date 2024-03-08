@@ -270,6 +270,8 @@ public class LL{
     // https://leetcode.com/problems/linked-list-cycle-ii
     // https://leetcode.com/problems/linked-list-cycle/
     // https://github.com/theabdulraffay/Leetcode-gdsc/tree/main/0142-Linked-List-Cycle-II
+    // https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+    // https://leetcode.com/problems/linked-list-random-node/description/
 
     public Node detectCycle(Node head){
     	int length = lengthOfCycle(head);
