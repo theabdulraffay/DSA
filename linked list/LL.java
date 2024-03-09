@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class LL{
 	Node head;
 	Node tail;
@@ -272,6 +273,7 @@ public class LL{
     // https://github.com/theabdulraffay/Leetcode-gdsc/tree/main/0142-Linked-List-Cycle-II
     // https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
     // https://leetcode.com/problems/linked-list-random-node/description/
+    // https://leetcode.com/problems/merge-nodes-in-between-zeros/
 
     public Node detectCycle(Node head){
     	int length = lengthOfCycle(head);
@@ -736,7 +738,62 @@ public class LL{
         return head;
 
     }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
 
+    // https://leetcode.com/problems/merge-nodes-in-between-zeros/
+    public Node mergeNodes(Node head) { // Input: head = [0,1,0,3,0,2,2,0], Output: [1,3,4]
+        Node prev = head;
+        Node temp = head.next;
+        int sum = 0;
+        while(temp != null){
+            sum += temp.value;
+            if(temp.value == 0){
+                temp.value = sum;
+                sum = 0;
+                prev.next = temp;
+                prev = temp;
+            }
+            temp = temp.next;
+        }
+        return head.next;
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/description/
+    public int[] nodesBetweenCriticalPoints(Node head) {
+        Node prev = head;
+        Node temp = head.next;
+        int c = 2;
+        ArrayList<Integer> list = new ArrayList<>();
+        while(temp.next != null){
+            if(temp.value > prev.value && temp.value > temp.next.value){
+                list.add(c);
+            }else if (temp.value < prev.value && temp.value < temp.next.value){
+                list.add(c);
+            }
+            c++;
+            prev = temp;
+            temp = temp.next;
+        }
+        System.out.println(list);
+        int fir = -1;
+        int sec = -1;
+        if(list.size() > 1)
+        {
+            fir = list.get(list.size() - 1) - list.get(0);
+            sec = list.get(list.size() - 1) - list.get(list.size() - 2);
+            for(int i = list.size() - 1; i > 0;i--){
+                if(list.get(i) - list.get(i - 1) < sec){
+                    sec = list.get(i) - list.get(i - 1);
+                }
+            }
+        }
+        return new int[]{sec, fir};
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    
+
+
+    
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(1);
