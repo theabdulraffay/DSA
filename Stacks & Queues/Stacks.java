@@ -51,6 +51,13 @@ class CustomStack{
 		return data[ptr];
 	}
 
+	public void display(){
+		for (int i = 0; i <= ptr; i++) {
+			System.out.print(data[i] + " ");
+		}
+		System.out.println("END");
+	}
+
 }
 public class Stacks {
 	public static void main(String[] args) throws StackException{
