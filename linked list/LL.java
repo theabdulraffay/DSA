@@ -5,25 +5,26 @@ public class LL{
 
 	int size;
 
-	public  LL(){
+	public  LL() {
 		this.size = 0;
 	}
-	private class Node{
+
+	private class Node {
 		int value;
 		Node next;
 
-		public Node(int value){
+		public Node(int value) {
 			this.value = value;
 		}
 
-		public Node(int value, Node next){
+		public Node(int value, Node next) {
 			this.value = value;
 			this.next = next;
 		}
 	}
 
 
-	public void insertFirst(int val){
+	public void insertFirst(int val) {
 		Node node = new Node(val);
 		node.next = head;
 		head = node;
@@ -33,31 +34,35 @@ public class LL{
 		size++;
 	}
 
-	public void insertLast(int val){
-		if(tail == null){
+	public void insertLast(int val) {
+		if (tail == null) {
 			insertFirst(val);
 			return;
 		}
+
 		Node node = new Node(val);
 		tail.next = node;
 		tail = node;
 		size++;
-
 	}
 
 	public void insert(int val, int index){
-		if(index == 0){
+		if (index == 0) {
 			insertFirst(val);
 			return;
 		}
-		if(index == size){
+
+		if (index == size) {
 			insertLast(val);
 			return;
 		}
+
 		Node temp = head;
-		for(int i = 1; i < index; i++){
+
+		for (int i = 1; i < index; i++) {
 			temp = temp.next;
 		}
+
 		Node node = new Node(val);
 		//Node node = new Node(val, temp.next); yah wala constructor bhi use kar sacty han 
 		Node n = temp.next;
@@ -101,10 +106,9 @@ public class LL{
 		//temp.next = temp2;
 		temp.next = temp.next.next;
 		return val;
-
-
 	}
-	public void display(){
+
+	public void display() {
 		Node temp = head;	
 		while(temp != null){
 			System.out.print(temp.value + "->");
@@ -570,8 +574,7 @@ public class LL{
     // https://leetcode.com/problems/reverse-nodes-in-k-group/description/
      boolean yes(Node n, int k) {
         for (int i = 0; i < k; i++) {
-            if (n == null)
-                return false;
+            if (n == null) return false;
             n = n.next;
         }
         return true;
@@ -790,7 +793,7 @@ public class LL{
         return new int[]{sec, fir};
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
-    
+
 
 
     
@@ -804,8 +807,5 @@ public class LL{
 		list.insertLast(6);
 		list.insertLast(7);
 		list.display();
-		
-
-		
 	}
 }
