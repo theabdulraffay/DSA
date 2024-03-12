@@ -1,3 +1,4 @@
+import java.util.Stack;
 // https://leetcode.com/problems/implement-queue-using-stacks/description/
 class QueueUsingStack { // This class is basically a que that is build on stacks, using all the function of stacks but is a queue in real.
 	CustomStack first = new CustomStack(); // This CustomStack class was buld in stacks.java file
@@ -38,10 +39,69 @@ class QueueUsingStack { // This class is basically a que that is build on stacks
 		first.display();
 	}
 }
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 // when we have a question regarding sequence, answer till here, sthing in back which can be used later we always use stacks and queues
-
 class Questions {
+	// https://leetcode.com/problems/largest-rectangle-in-histogram/
+    public int largestRectangleArea(int[] heights) { // Input: heights = [2,1,5,6,2,3], Output: 10
+        int n = heights.length;
+        int[] leftSmall = new int[n];
+        int[] rightSmall = new int[n];
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        int j = n-1;
+
+        for(int i = 0; i< n; i++){
+            while(!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+                stack.pop();
+            }
+
+            leftSmall[i] = stack.isEmpty() ? 0 : stack.peek() + 1;
+            stack.push(i);
+        }
+        for(int i = n - 1; j >= 0;j--) {
+            while(!stack2.isEmpty() && heights[stack2.peek()] >= heights[j]){
+                stack2.pop();
+            }
+            rightSmall[j] = stack2.isEmpty() ? n-1 : stack2.peek() - 1;
+            stack2.push(j);
+        }
+        int max = 0;
+        for (int i = 0;i<n;i++){
+            int t = rightSmall[i] - leftSmall[i] + 1;
+            t = t * heights[i];
+            max = Math.max(max,t);
+        }
+        return max;
+    }	
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/valid-parentheses/
+    public boolean isValid(String t) { // Input: s = "()[]{}", Output: true
+        Stack<Character> stack = new Stack<>();
+        if(t.length() < 2)return false;
+        for(int i = 0;i<t.length(); i++){
+            char k = t.charAt(i);
+            if(k == '(' || k == '[' || k == '{'){
+                stack.push(k);
+            }else if(!stack.isEmpty()){
+                char top = stack.pop();
+                if(k == ')' && top != '('){
+                    return false;
+                }else if(k == ']' && top != '['){
+                    return false;
+                }else if(k == '}' && top != '{'){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }	
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
 	public static void main(String[] args) throws StackException {
 		QueueUsingStack que = new QueueUsingStack();
 		que.push(5);
