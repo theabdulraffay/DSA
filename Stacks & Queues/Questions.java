@@ -101,7 +101,7 @@ class Questions {
         return stack.isEmpty();
     }	
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
 	public static void main(String[] args) throws StackException {
 		QueueUsingStack que = new QueueUsingStack();
 		que.push(5);
