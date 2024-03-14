@@ -545,6 +545,7 @@ public class LL{
     // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
     // https://leetcode.com/problems/merge-in-between-linked-lists/
+    // https://leetcode.com/problems/linked-list-random-node/description/
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/remove-linked-list-elements/description/
     public Node removeElements(Node head, int val) {// head = [1,2,6,3,4,5,6], val = 6 // Output: [1,2,3,4,5]
