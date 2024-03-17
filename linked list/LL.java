@@ -278,7 +278,7 @@ public class LL{
     // https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
     // https://leetcode.com/problems/linked-list-random-node/description/
     // https://leetcode.com/problems/merge-nodes-in-between-zeros/
-
+    // https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
     public Node detectCycle(Node head){
     	int length = lengthOfCycle(head);
     	if(length == 0)return null;
@@ -794,7 +794,38 @@ public class LL{
         return new int[]{sec, fir};
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/submissions/
+    public int pairSum(Node head) { // Input: head = [5,4,2,1], Output: 6
+        Node fast = head.next;
+        Node slow = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
 
+        Node temp = slow.next;
+        slow.next = null;
+        Node current = temp;
+        Node prev = null;
+
+        while (temp != null) { // First reverse the second half of the linked list, then keep comparing the first half and second half by adding their values, and storin them in max.
+            Node next = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = next;
+        }
+
+        int max = 0;
+        while (prev != null) { // Use two different pointers pointing to the first nodes of the two halves of the linked list. The second pointer will point to the first node of the reversed half, which is the (n-1-i)th node in the original linked list. By moving both pointers forward at the same time, we find all twin sums.
+            int sum = head.value + prev.value;
+            max = Math.max(max, sum);
+            head = head.next;
+            prev = prev.next;
+        }
+        return max;       
+    }
+    // -------------------------------------------------------------------------------------------------------------------------------------------
+    
 
 
     
