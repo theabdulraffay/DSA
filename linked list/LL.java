@@ -546,6 +546,7 @@ public class LL{
     // https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/
     // https://leetcode.com/problems/merge-in-between-linked-lists/
     // https://leetcode.com/problems/linked-list-random-node/description/
+
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/remove-linked-list-elements/description/
     public Node removeElements(Node head, int val) {// head = [1,2,6,3,4,5,6], val = 6 // Output: [1,2,3,4,5]
@@ -825,6 +826,57 @@ public class LL{
         return max;       
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/add-two-numbers/description/
+    public Node addTwoNumbers(Node l1, Node l2) { // Input: l1 = [2,4,3], l2 = [5,6,4], Output: [7,0,8], Explanation: 342 + 465 = 807.
+
+        Node temp = new Node(-1, null);
+        Node head2 = temp;
+        int carry = 0;
+        while (l1 != null && l2 != null) {
+            int sum = l1.value + l2.value + carry;
+            if (sum > 9) {
+                sum = sum % 10;
+                carry = 1;
+            } else {carry = 0;}
+            Node ntemp = new Node(sum);
+            temp.next = ntemp;
+            temp = ntemp;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        while (l1 != null) {
+            int sum = carry + l1.value;
+            if (sum > 9) {
+                sum = sum % 10;
+                carry = 1;
+            } else {carry = 0;}
+            Node ntemp = new Node(sum);
+            temp.next = ntemp;
+            temp = ntemp;
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            int sum = carry + l2.value;
+            if (sum > 9) {
+                sum = sum % 10;
+                carry = 1;
+            } else {carry = 0;}
+            Node ntemp = new Node(sum);
+            temp.next = ntemp;
+            temp = ntemp;
+            l2 = l2.next;
+        }
+
+        if (carry == 1) {
+            Node ntemp = new Node(carry);
+            temp.next = ntemp;
+            temp = ntemp;
+        }
+        return head2.next;
+        
+    }
     
 
 
