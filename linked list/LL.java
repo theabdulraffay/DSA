@@ -882,24 +882,24 @@ public class LL{
     public Node mergeKLists(Node[] lists) { // Input: lists = [[1,4,5],[1,3,4],[2,6]], Output: [1,1,2,3,4,4,5,6]
         if (lists.length == 0) return null;
         if (lists.length == 1) return lists[0];
-        Node merge = null;
+        Node l1 = null;
         for (Node node : lists) {
             Node temp = new Node(-1, null);
             Node head2 = temp;
-            while (merge != null && node != null) {
-                if (merge.value < node.value) {
-                    temp.next = merge;
-                    merge = merge.next;
+            while (l1 != null && node != null) {
+                if (l1.value < node.value) {
+                    temp.next = l1;
+                    l1 = l1.next;
                 } else {
                     temp.next = node;
                     node = node.next;
                 }
                 temp = temp.next;
             }
-            temp.next = (merge != null) ? merge : node;
-            merge = head2.next; // after each iteration we will update this node
+            temp.next = (l1 != null) ? l1 : node;
+            l1 = head2.next; // after each iteration we will update this node
         }
-        return merge;
+        return l1;
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
 	public static void main(String[] args) {
