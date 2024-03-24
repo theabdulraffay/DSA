@@ -7,7 +7,8 @@ class Recursion{
 		System.out.println(countZeros(540020100, 0));
 		
 	}
-
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// RECURSION BASIC QUESTIONS
 	static int fibonachi(int n) {
 		if (n < 2) {
 			return n;
@@ -100,15 +101,16 @@ class Recursion{
 		if(n % 10 == 0) count++;
 		return countZeros(n/10, count);
 	}
-
+	// -------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/description/
-	int helperNumberOfSteps(int n,int m) {
+    public int numberOfSteps(int num) { // Input: num = 14, Output: 6
+        return helperNumberOfSteps(num, 0);
+    }
+    int helperNumberOfSteps(int n,int m) {
         if (n == 0) return m;
         if(n % 2 == 1) return helperNumberOfSteps(n - 1, m + 1);
         return helperNumberOfSteps(n / 2, m + 1);
     }
-    public int numberOfSteps(int num) { // Input: num = 14, Output: 6
-        return helperNumberOfSteps(num, 0);
-        
-    }
+
+    
 }
