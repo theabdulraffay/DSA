@@ -1,9 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 class Subsets{
 	public static void main(String[] args) {
 		String a = "abc";
 		// subset("abc", "");
-		System.out.println(subset2("abc", ""));
+		// System.out.println(subset2("abc", ""));
+
+		int[] arr = {1,2,2};
+		List<List<Integer>> ans = subset(arr);
+		for (List<Integer> i : ans) {
+			System.out.println(i);
+		}
+
 
 
 
@@ -44,10 +53,46 @@ class Subsets{
 		ArrayList<String> newlist = new ArrayList<String>();
 		newlist.addAll(l1);
 		newlist.addAll(l2);
-		return newlist;
+		return newlist; 
 
 	}
 
+	static List<List<Integer>> subset(int[] arr) { // This works by adding the elements of array ony by one to the half of the original list of list, in this way subsets can be created, when duplicate copy are generated and and the element of the array is added to this duplicate array and then again all these duplicate array are added tp the list of list, in this way with each iteration size of origional array get double 
+		List<List<Integer>>list = new ArrayList<List<Integer>>();
+		list.add(new ArrayList<Integer>());
+		for (int num : arr) {
+			int n = list.size();
+			for (int i = 0; i < n; i++) {
+				ArrayList<Integer> newlist = new ArrayList<Integer>(list.get(i));
+				newlist.add(num);
+				list.add(newlist);
+			}
+		}
+		return list;
+	}
+
+ 	// when find a duplocate element inly add it in the newly created subseet in the previous step (ony when duplicates are together), sort the array
+
+ 	static List<List<Integer>> subsetDuplicate(int[] arr) { // If array has a duplicate value it will not add it in the previous list of subsets, it will skip it so we do start = end. 
+ 		Arrays.sort(arr);
+		List<List<Integer>>list = new ArrayList<List<Integer>>();
+		list.add(new ArrayList<Integer>());
+		int start = 0;
+		int end = 0;
+		for (int i = 0; i < arr.length; i++) {
+			if (i > 0 && arr[i] == arr[i - 1]) {
+				start = end;
+			}
+			int n = list.size();
+			end = n;
+			for (int j = start; j < n; j++) {
+				ArrayList<Integer> newlist = new ArrayList<Integer>(list.get(j));
+				newlist.add(arr[i]);
+				list.add(newlist);
+			}
+		}
+		return list;
+	}
 
 
 }

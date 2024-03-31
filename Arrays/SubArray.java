@@ -1,6 +1,16 @@
 import java.util.HashMap;
 class SubArray {
 	public static void main(String[] args) {
+        double x = 0.00001;
+        int n = 2147483647;
+
+        if (n == 0)System.out.println("noooooo");
+        double t = x;
+        int temp = Math.abs(n);
+        for(int i = 1; i < temp; i++) {
+            x *= t;
+        }
+        System.out.println((n < 0) ? 1/x : x);
 		
 	}
     
@@ -50,6 +60,9 @@ class SubArray {
         }
         return ans;
     }
+
+    // https://leetcode.com/problems/subarrays-with-k-different-integers/description/
+    // https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/
 
     
 }
