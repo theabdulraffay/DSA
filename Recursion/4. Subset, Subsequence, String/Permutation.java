@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 class Permutation {
 	public static void main(String[] args) {
-		String s = "abc";
+		String s = "abcd";
 		// permutation("", s);	
 		System.out.println(Arraypermutation("", s));
+		System.out.println(permutationCount("", s));
 
 	}
 
@@ -37,6 +38,22 @@ class Permutation {
 			finalList.addAll(newlist);
 		}
 		return finalList;
+	}
+
+
+	static int permutationCount(String newString, String s) { // This will return the number of permutations, we can se formula as well this is just for learning purpose
+		if (s.isEmpty()) {
+			// System.out.println(newString);
+			return 1;
+		}
+		int count = 0;
+		for (int i = 0; i <= newString.length(); i++) {
+			String first = newString.substring(0, i);
+			String second = newString.substring(i);
+			char ch = s.charAt(0);
+			count += permutationCount(first + ch + second, s.substring(1));
+		}
+		return count;
 	}
 
 }
