@@ -1,12 +1,13 @@
 import java.util.*;
 class Questions {
 	public static void main(String[] args) {
-		LetterCombinationsofaPhoneNumber("", "28");
+		// LetterCombinations("", "28");
 		// System.out.println(LetterCombinationsofaPhoneNumberList("", "23"));
-
-		
+		// diceRoll("", 4);
+		System.out.println(diceRollRet("", 5));
 	}
 
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	static void LetterCombinationsofaPhoneNumber(String newString, String s) {
 		if (s.isEmpty()) {
 			System.out.println(newString);
@@ -22,8 +23,9 @@ class Questions {
 		}
 	}
 
-
-	static List<String> LetterCombinationsofaPhoneNumberList(String newString, String s) {
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+	static List<String> LetterCombinationsofaPhoneNumberList(String newString, String s) { // Input: digits = "23", Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 		if (s.isEmpty()) {
 			List<String> newstr = new ArrayList<String>();
             if(newString.isEmpty()) return newstr;
@@ -44,6 +46,46 @@ class Questions {
 			char temp = (char)('a' + first + i + c);
 			List<String> returned = LetterCombinationsofaPhoneNumberList(newString + temp, s.substring(1));
 			list.addAll(returned);
+		}
+		return list;
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	static void LetterCombinations(String newString, String s) { // A much cleaner code
+		if (s.isEmpty()) {
+			System.out.println(newString);
+			return;
+		}
+		int digit = s.charAt(0) - '0';
+		int rotations = (digit == 7 || digit == 9) ? 4 : 3;
+        int c = (digit > 7) ? 1 : 0;
+		int index = (digit - 2) * 3;
+		for(int i = index; i < rotations + index; i++) {
+			char temp = (char)('a' + i + c);
+			LetterCombinations(newString + temp, s.substring(1));
+		}
+	}
+
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	static void diceRoll(String xp, int n) { // all possible combination that add up to form n
+		if (n == 0) {
+			System.out.println(xp);
+		}
+		for (int i = 1; i <= 6 && i <= n; i++) {
+			diceRoll(xp + i, n - i);
+		}
+	}
+
+
+	static List<String> diceRollRet(String xp, int n) { // all possible combination that add up to form n
+		if (n == 0) {
+			List<String> list = new ArrayList<String>();
+			list.add(xp);
+			return list;
+		}
+		 List<String> list = new ArrayList<String>();
+		for (int i = 1; i <= 6 && i <= n; i++) {
+			list.addAll(diceRollRet(xp + i, n - i));
 		}
 		return list;
 	}
