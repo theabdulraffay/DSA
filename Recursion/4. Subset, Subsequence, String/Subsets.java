@@ -57,6 +57,7 @@ class Subsets{
 
 	}
 
+	// https://leetcode.com/problems/subsets/
 	static List<List<Integer>> subset(int[] arr) { // This works by adding the elements of array ony by one to the half of the original list of list, in this way subsets can be created, when duplicate copy are generated and and the element of the array is added to this duplicate array and then again all these duplicate array are added tp the list of list, in this way with each iteration size of origional array get double 
 		List<List<Integer>>list = new ArrayList<List<Integer>>();
 		list.add(new ArrayList<Integer>());
@@ -94,5 +95,24 @@ class Subsets{
 		return list;
 	}
 
+
+	// https://leetcode.com/problems/subsets-ii/description/
+	public List<List<Integer>> subsetsWithDup(int[] arr) {
+        Arrays.sort(arr);
+		List<List<Integer>> list = new ArrayList<List<Integer>>();
+		list.add(new ArrayList<Integer>());
+		for (int i = 0; i < arr.length; i++) {
+			int n = list.size();
+			for (int j = 0; j < n; j++) {
+				ArrayList<Integer> newlist = new ArrayList<Integer>(list.get(j));
+				newlist.add(arr[i]);
+				if(!list.contains(newlist)){
+                    list.add(newlist);
+                }
+			}
+		}
+		return list;
+        
+    }
 
 }
