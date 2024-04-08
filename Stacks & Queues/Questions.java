@@ -1,4 +1,6 @@
 import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
 // https://leetcode.com/problems/implement-queue-using-stacks/description/
 class QueueUsingStack { // This class is basically a que that is build on stacks, using all the function of stacks but is a queue in real.
 	CustomStack first = new CustomStack(); // This CustomStack class was buld in stacks.java file
@@ -243,6 +245,32 @@ class Questions {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/description/
+    public int countStudents(int[] students, int[] sandwiches) {
+        Stack<Integer> sandwich = new Stack<>();
+        Queue<Integer> student = new LinkedList<Integer>();
+        int n = students.length, k = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            sandwich.push(sandwiches[i]);
+            student.add(students[k++]);
+        }
+
+        while(!student.isEmpty()) {
+            if (student.peek() == sandwich.peek()) {
+                student.poll();
+                sandwich.pop();
+            }
+            else if (student.contains(sandwich.peek())) {
+                while (student.peek() != sandwich.peek()) {
+                    student.add(student.poll());
+                }
+            } else {
+                return student.size();
+            }
+        }
+        return 0;
+        
+    }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
