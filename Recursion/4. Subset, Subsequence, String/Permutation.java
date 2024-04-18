@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 class Permutation {
 	public static void main(String[] args) {
@@ -95,9 +96,60 @@ class Permutation {
             nums[j] = t;
             i++;
             j--;
+        }   
+    }
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/permutations/description/
+    void per(List<List<Integer>> list,List<Integer> temp,int[] nums){
+        if(temp.size() == nums.length) {
+            list.add(new ArrayList<>(temp));
+            return;
         }
+        for (int i = 0; i < nums.length; i++) {
+            if (temp.contains(nums[i])) continue;
+            temp.add(nums[i]);
+            per(list, temp, nums);
+            temp.remove(temp.size() - 1);
+        }
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        per(list, new ArrayList<Integer>(), nums);
+        return list;
         
     }
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/permutations-ii/
+    void per(List<List<Integer>> list, List<Integer> temp,int[] nums, boolean[] bol) {
+        if (temp.size() == nums.length) {
+            System.out.println(temp);
+            if (!list.contains(temp)) {
+                list.add(new ArrayList<>(temp));
+            }
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if(bol[i])continue;
+            temp.add(nums[i]);
+            bol[i] = true;
+            per(list, temp, nums, bol);
+            bol[i] = false;
+            temp.remove(temp.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        per(list, new ArrayList<Integer>(), nums, new boolean[nums.length]);
+        return list;      
+    }
+
+
 
 
 }
