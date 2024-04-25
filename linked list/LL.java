@@ -354,6 +354,7 @@ public class LL{
     	tail.next = n;
     	tail = n;
     	tail.next = null; 
+    	return;
     }
 
     // https://leetcode.com/problems/reverse-linked-list/

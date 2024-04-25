@@ -116,6 +116,29 @@ class BinaryTree {
 		display(n.left, indent + "\t");
 		display(n.right, indent + "\t");
 	}
+
+	public void prettyDisplay () {
+		prettyDisplay(root, 0);
+	}
+
+	private void prettyDisplay (Node n, int indent) {
+		if (n == null) {
+			return;
+		}
+		prettyDisplay(n.right, indent + 1);
+		if (indent != 0) {
+			for (int i = 0; i < indent - 1; i++) {
+				System.out.print("|\t\t");
+			}
+
+			System.out.println("|-------->" + n.val);
+		} else {
+			System.out.println(n.val);
+		}
+
+		prettyDisplay(n.left, indent + 1);
+
+	}
 }
 
 
