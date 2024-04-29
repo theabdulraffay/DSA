@@ -93,6 +93,10 @@ class BinarySearchTree {
 
     	return Math.abs(height(node.left) - height(node.right)) <= 1 && isBalance(node.left) && isBalance(node.right);
     }
+
+
+    // https://leetcode.com/problems/search-in-a-binary-search-tree/
+    // https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/
     public static void main(String[] args) {
     	// insert(5);
     	// insert(4);
