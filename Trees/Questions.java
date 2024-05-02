@@ -102,7 +102,7 @@ class BST {
 
 	// ------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/average-of-levels-in-binary-tree/
-    public List<Double> averageOfLevels(Node root) {
+    public List<Double> averageOfLevels(Node root) { // GOOGLE QUESTION
         List<Double> list = new ArrayList<>();
      	if(root == null) return list;
      	Queue<Node> queue = new LinkedList<Node>();
@@ -123,9 +123,94 @@ class BST {
      	return list;
         
     }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+    public int levelOrderSuccessor(int key) { // GOOGLE QUESTION // This will return the value of the node which is present at the right side of that node again we use queue to store levels of binary tree, when we find that particular node of value kep we just retrieve the value which is next to it (value to the right of the node, if the right node is null we just return the left node of one step lower level of binary tree)
+     	if(root == null) return -1;
+     	Queue<Node> queue = new LinkedList<Node>();
+     	queue.add(root);
+
+     	while(!queue.isEmpty()){
+     		Node temp = queue.poll();
+     		if(temp.left != null) queue.add(temp.left);
+     		if(temp.right != null) queue.add(temp.right);
+     		if(temp.val == key) break;
+     		
+     	}
+     	return queue.peek().val;
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+    public List<List<Integer>> zigzagLevelOrder() { // AMAZON, GOOGLE, META, MICROSFT QUESTION, Also known as spiral Level Order 
+    // In this we travel the Binary tree in zig zag pattern, so we just reverse every second list before we add it to the main list;
+    	List<List<Integer>> list = new ArrayList<>();
+    	Queue<Node> queue = new LinkedList<>();
+    	queue.add(root);
+    	if (root == null) return list;
+    	int reverse = 1;
+
+    	while (!queue.isEmpty()) {
+    		int levelSize = queue.size();
+    		List<Integer> level = new ArrayList<>(levelSize);
+    		for (int i = 0; i < levelSize; i++) { // this for loop will always run number of node in a level time
+    			Node temp = queue.poll();
+    			level.add(temp.val);
+    			if(temp.left != null) queue.add(temp.left);
+    			if(temp.right != null) queue.add(temp.right);
+    		}
+
+    		if (reverse == 1) {
+    			reverse = 0;
+    		} else {
+    			Collections.reverse(level);
+    			reverse = 1;
+    		}
+    		list.add(level);
+    	}
+    	return list;   
+    }
+
+
+    public List<List<Integer>> zigzagLevelOrder2() { // The same problem can be solved using deque
+    	List<List<Integer>> list = new ArrayList<>();
+    	Deque<Node> queue = new LinkedList<>();
+    	queue.add(root);
+    	if (root == null) return list;
+    	boolean reverse = false;
+
+    	while (!queue.isEmpty()) {
+    		int levelSize = queue.size();
+    		List<Integer> level = new ArrayList<>(levelSize);
+    		for (int i = 0; i < levelSize; i++) { 
+    			if (!reverse) {
+    				Node temp = queue.pollFirst();
+	    			level.add(temp.val);
+	    			if(temp.left != null) queue.addLast(temp.left);
+	    			if(temp.right != null) queue.addLast(temp.right);
+    			} else { // for every second iteration instead of removing element from the first position we just remove from the last in this was a reverse list is added to the main list
+    				Node temp = queue.pollLast();
+	    			level.add(temp.val);
+	    			if(temp.right != null) queue.addFirst(temp.right);
+	    			if(temp.left != null) queue.addFirst(temp.left);
+    			}
+    		}
+    		reverse = !reverse;
+    		list.add(level);
+    	}
+    	return list;   
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -147,6 +232,14 @@ class Questions {
 		for(List<Integer> i : ins) {
 			System.out.println(i);
 		}
+
+
+		System.out.println();
+		List<List<Integer>> in = tree.zigzagLevelOrder2();
+		for(List<Integer> i : in) {
+			System.out.println(i);
+		}
+		// System.out.println(tree.levelOrderSuccessor(7));
 		
 	}
 }
