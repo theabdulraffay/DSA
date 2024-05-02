@@ -202,11 +202,143 @@ class BST {
     }
 
 // -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+    public Node connect() { // AMAZON - IMPORTANT QUESTION // connect every node with the node to its right using 'next' pointer
+     	if(root == null) return root;
+     	Queue<Node> queue = new LinkedList<Node>(); // This will maintain the left to right all the nodes of the a same level
+     	queue.add(root);
+
+     	while(!queue.isEmpty()) {
+     		int levelSize = queue.size(); 
+     		for(int i = 0; i < levelSize; i++) { 
+     			Node temp = queue.poll();
+     			if(i != levelSize - 1) {
+     				// temp.next = queue.peek(); // This line is commented arbitrary, copy paste the solution in leetcode to get ur result
+     			}
+     			if(temp.left != null) queue.add(temp.left);
+     			if(temp.right != null) queue.add(temp.right);
+     		}
+     	}
+     	return root;
+     	   
+    }
 
 
+    public Node connect2() { // AMAZON - IMPORTANT QUESTION // connect every node with the node to its right using 'next' pointer
+     	if(root == null) return root;
+
+     	Node leftNode = root;
+     	while(leftNode.left != null) {
+     		Node current = leftNode;
+     		while(current != null) {
+     			// current.left.next = current.right;
+     			// if (current.next != null) current.right.next = current.next.left; // Commented because absence of 'next' pointer in our class structure
+     			// current = current.next;
+     		}
+     		leftNode = leftNode.left;
+     	}
+     	return root;
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/binary-tree-right-side-view
+    public List<Integer> rightSideView(Node root) { // FACEBOOK, NVIDIA, FLIPCART, AMAZON QUESTION // contains only the far right node of the binary tree
+        List<Integer> list = new ArrayList<>();
+        if (root==null) return list;
+        Queue<Node> que = new LinkedList<>();
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            for (int i = 0; i < size; i++) {
+                Node temp = que.poll();
+                if(temp.left != null) que.add(temp.left);
+                if(temp.right != null) que.add(temp.right);
+                if(i == size - 1) list.add(temp.val);
+            }
+        }
+        return list;
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/cousins-in-binary-tree/
+    public boolean isCousins(Node root, int x, int y) {
+        Queue<Node> que = new LinkedList<>();
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            boolean first = false;
+            boolean second = false;
+            for (int i = 0; i < size; i++) {
+                Node temp = que.poll();
+                if(temp.left != null) que.add(temp.left);
+                if(temp.right != null) que.add(temp.right);
+                if((temp.left != null && temp.left.val == x) || ( temp.right != null && temp.right.val == x)) {
+                    first = true;
+                } else if ((temp.left != null && temp.left.val == y) || (temp.right != null && temp.right.val == y)){
+                    second = true;
+                }
+            }
+            if (first && second) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isCousins2(Node root, int x, int k) { // Another way to solve this same question
+    	Node xx = findNode(root, x);
+        Node yy = findNode(root, k);
+        return (level(root, xx, 0) == level(root, yy, 0)) && (!isSibling(root, xx, yy));
+    }
 
 
+    boolean isSibling(Node root, Node xx, Node yy) {
+    	if (root == null) {
+    		return false;
+    	}
 
+    	return (
+    		(root.left == xx && root.right == yy) || (root.right == xx && root.left == yy) || isSibling(root.left, xx, yy) || isSibling(root.right, xx, yy)
+    	);
+    }
+
+    Node findNode(Node root, int x) {
+    	if (root == null) {
+    		return null;
+    	}
+
+    	if (root.val == x) {
+    		return root;
+    	}
+
+    	Node left = findNode(root.left, x);
+    	if (left != null) {
+    		return left;
+    	}
+    	return findNode(root.right, x);
+    }
+
+    int level (Node root, Node xx, int level) {
+    	if(root == null) {
+    		return 0;
+    	}
+    	if (root == xx) {
+    		return level;
+    	}
+
+    	int l = level(root.left, xx, level + 1);
+    	if(l != 0) {
+    		return l;
+    	}
+    	return level(root.right, xx, level + 1);
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------
