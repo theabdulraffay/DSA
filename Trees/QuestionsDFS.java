@@ -108,7 +108,71 @@ class BST {
         return root;
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/
+    public void flatten(TreeNode root) { // FACEBOOK QUESTION // put all the nodes to the right of the root node and null the left node for each node
+        if(root == null) return;
+        while(root.left != null || root.right != null) {
+            if(root.left != null) {
+                TreeNode temp = root.right;
+                TreeNode t = root.left;
+                while(t.right != null) {
+                    t = t.right;
+                }
+                root.right = root.left;
+                t.right = temp;
+                root.left = null;
+            }
+            root = root.right;
+        }
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/validate-binary-search-tree/description/
+    boolean valid (TreeNode node, int val, boolean left) { // For each node it will check both sides and return boolean value respectively
+        if(node == null) return true;
+        if(left) {
+            if(node.val >= val) {
+                return false;
+            }
+        } else {
+            if(node.val <= val) {
+                return false;
+            }
+        }
+        boolean leftb = valid(node.left, val, left);
+        boolean right = valid(node.right, val, left);
+        return leftb && right;
+    }
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        boolean left = valid(root.left, root.val, true); // We check for each node left and right and repeat this process for every node
+        boolean right = valid(root.right, root.val, false);
+
+        boolean f = left && right;
+        boolean l = isValidBST(root.left);
+        boolean r = isValidBST(root.right);
+        return f & l & r;
+        
+    }
+
+    public boolean isValidBST2(TreeNode root) {
+        return valid(root, null, null);
+        
+    }
+
+    boolean valid (TreeNode node, Integer low, Integer high) { // For each node it will check both sides and return boolean value respectively
+        if(node == null) return true;
+        if (low != null && node.val >= low) {
+            return false;
+        }
+
+        if (high != null && node.val <= high) {
+            return false;
+        }
+        boolean left = valid(node.left, node.val, high);
+        boolean right = valid(node.right, low, node.val);
+        return left && right;
+    }
+    
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
