@@ -334,6 +334,80 @@ class BST {
     }
 
 // -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/symmetric-tree/description/
+    boolean notPalindrome(List<Integer> list) {
+        int st = 0;
+        int en = list.size() - 1;
+        while (st < en) {
+            if(list.get(st++) != list.get(en--)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean isSymmetric(Node root) {
+        Queue<Node> que = new LinkedList<>();
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                Node temp = que.poll();
+                if(temp.val == -101) {
+                    list.add(-101);
+                    continue;
+                }
+                if(temp.left != null) que.add(temp.left);
+                else que.add(new Node(-101));
+
+                if(temp.right != null) que.add(temp.right);
+                else que.add(new Node(-101));
+                list.add(temp.val);
+            }
+            if (notPalindrome(list)) {
+                return false;
+            }
+        }
+        return true;   
+    }
+
+
+    public boolean isSymmetric2(Node root) { // Recursively
+        return symmetry(root.left, root.right);
+    }
+
+    boolean symmetry(Node l, Node r) {
+        boolean a = l == null;
+        boolean b = r == null;
+        if(a && b) return true;
+        if (a || b || l.val  != r.val) return false;
+        return symmetry(l.left, r.right) && symmetry(l.right, r.left);
+        
+    }
+
+    public boolean isSymmetric3(Node root) { // Iteratively
+		Queue<Node> que = new LinkedList<>();
+		que.add(root.left);
+		que.add(root.right);
+		while (!que.isEmpty()) {
+			Node l = que.poll();
+			Node r = que.poll();
+			boolean a = l == null;
+			boolean b = r == null;
+			if(a && b) {
+				continue;
+			}
+			if(a || b || l.val != r.val) {
+				return false;
+			}
+
+			que.add(l.left);
+			que.add(r.right);
+			que.add(l.right);
+			que.add(r.left);
+		}
+		return true;
+    }
 // -----------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------
