@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 class BST {
 	private class TreeNode {
 		private int val; 
@@ -174,7 +176,33 @@ class BST {
     }
     
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+    // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) { // Returns the lowest ansestor for p and q
+        if (root == null) return null;
+        if(root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) return root;
+        else if (left != null) return left;
+        return right;
+        
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+    public int kthSmallest(TreeNode root, int k) {// FACEBOOK, AMAZON, GOOGLE // returns kth smallest element in BST using IN ORDER TRAVERSAL
+        List<Integer> list = new ArrayList<>();
+        insert(root, list);
+        return list.get(k - 1);
+        
+    }
+
+    void insert(TreeNode root, List<Integer> list) {
+        if(root == null) return;
+        insert(root.left, list);
+        list.add(root.val);
+        insert(root.right, list);
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }

@@ -409,6 +409,31 @@ class BST {
 		return true;
     }
 // -----------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
+    public int maxLevelSum(Node root) { // it will return the level that has maximum sum
+        Queue<Node> que = new LinkedList<>();
+        int counter = 1;
+        int level = 0;
+        int max = Integer.MIN_VALUE;
+        que.add(root);
+        while(!que.isEmpty()) {
+            int sum = 0;
+            int levelSize = que.size();
+     		for(int i = 0; i < levelSize; i++) {
+     			Node temp = que.poll();
+     			sum += temp.val;
+     			if(temp.left != null) que.add(temp.left);
+     			if(temp.right != null) que.add(temp.right);
+     		}
+            if(sum > max) {
+                max = sum;
+                level = counter;
+            }
+            counter++;
+        }
+        return level;
+        
+    }
 // -----------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------
