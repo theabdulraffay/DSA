@@ -203,6 +203,26 @@ class BST {
         list.add(root.val);
         insert(root.right, list);
     }
+
+
+    public int kthSmallest2(TreeNode root, int k) {
+        return helper(root, k).val;
+        
+    }
+    int counter = 0;
+    TreeNode helper(TreeNode root, int k) {
+        if(root == null) {
+            return root;
+        }
+
+        TreeNode left = helper(root.left, k);
+        if(left != null) return left;
+        counter++;
+        if(counter == k){
+            return root;
+        }
+        return helper(root.right, k);
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }

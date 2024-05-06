@@ -903,6 +903,36 @@ public class LL{
         return l1;
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/remove-nodes-from-linked-list/
+    // Node reverse(Node node) {
+    //     if(node==null || node.next==null){
+    //         return node;
+    //     }
+    //     Node curr = node;
+    //     Node prev = null;
+    //     while (curr != null) {
+    //         Node next = curr.next;
+    //         curr.next = prev;
+    //         prev = curr;
+    //         curr = next;
+    //     }
+    //     return prev;
+    // }
+    public Node removeNodes(Node head) { // Input: head = [5,2,13,3,8], Output: [13,8]
+        Node curr = IterativeRecursion(head);
+        Node next = curr.next;
+        head = curr;
+
+        while (next != null) {
+            while(next != null && next.value < curr.value) {
+                next = next.next;
+            }
+            curr.next = next;
+            curr = next;
+            if(next != null) next = next.next;
+        }
+        return IterativeRecursion(head);
+    }
 	public static void main(String[] args) {
 		LL list = new LL();
 		list.insertLast(1);
