@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 class BST {
 	private class TreeNode {
 		private int val; 
@@ -223,6 +224,54 @@ class BST {
         }
         return helper(root.right, k);
     }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder.length == 0) return null; 
+        if(preorder.length == 1) return new TreeNode(preorder[0]);
+        int r = preorder[0];
+        TreeNode root = new TreeNode(r);
+        int index = 0;
+        for(int i = 0; i < inorder.length; i++) {
+            if(inorder[i] == r) {
+                index = i; 
+                break;
+
+            }
+        }
+
+        root.left = buildTree(Arrays.copyOfRange(preorder, 1, index + 1), Arrays.copyOfRange(inorder, 0, index));
+        root.right = buildTree(Arrays.copyOfRange(preorder, index + 1, preorder.length), Arrays.copyOfRange(inorder, index + 1, inorder.length));
+        return root;
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
+    public TreeNode buildTreefromPostorder(int[] inorder, int[] postorder) {
+        if(postorder.length == 0) return null; 
+        if(postorder.length == 1) return new TreeNode(postorder[0]);
+        int r = postorder[postorder.length - 1];
+        TreeNode root = new TreeNode(r);
+        int index = 0;
+        for(int i = 0; i < inorder.length; i++) {
+            if(inorder[i] == r) {
+                index = i; 
+                break;
+            }
+        }
+        root.left = buildTree(Arrays.copyOfRange(inorder, 0, index), Arrays.copyOfRange(postorder, 0, index));
+        root.right = buildTree(Arrays.copyOfRange(inorder, index + 1, inorder.length), Arrays.copyOfRange(postorder, index, postorder.length - 1));
+        return root;
+        
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
