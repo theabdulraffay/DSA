@@ -1,6 +1,16 @@
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
+//https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 class BST {
 	private class TreeNode {
 		private int val; 
@@ -226,7 +236,7 @@ class BST {
     }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree(int[] preorder, int[] inorder) { // GOOGLE QUESTION
         if(preorder.length == 0) return null; 
         if(preorder.length == 1) return new TreeNode(preorder[0]);
         int r = preorder[0];
@@ -266,11 +276,187 @@ class BST {
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
+    class Codec { // It codes and decodes the tree into string and back to tree
+    StringBuffer list = new StringBuffer();
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        helper(root);
+        return list.toString();
+    }
+
+    void helper(TreeNode root) {
+        if(root == null) {
+            list.append("null ");
+            return;
+        }
+        list.append(String.valueOf(root.val));
+        list.append(" ");
+        helper(root.left);
+        helper(root.right);
+
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] s = data.split(" ");
+        return helper2(s);
+        
+    }
+    int index = 0;
+    TreeNode helper2(String[] s) {
+        if(s[index].equals("null")) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.parseInt(s[index]));
+        index++;
+        root.left = helper2(s);
+        index++;
+        root.right = helper2(s);
+        return root;
+    }
+}
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                        // Path Questions
+// https://leetcode.com/problems/path-sum/
+public boolean hasPathSum(TreeNode root, int targetSum) { // AMAZON QUESTION 
+        if(root == null) return false;
+        if (root.left == null && root.right == null) {
+            return targetSum == root.val;
+        }
+
+        boolean left = hasPathSum(root.left, targetSum - root.val);
+        if (left) return true;
+        return hasPathSum(root.right, targetSum - root.val);
+
+    }
+    // sumTillNow is initially set to 0;
+    // boolean helper(TreeNode root, int targetSum, int sumTillNow) {
+    //     if(root == null) return false;
+    //     if (root.left == null && root.right == null) {
+    //         return targetSum == sumTillNow + root.val;
+    //     }
+
+    //     boolean left = helper(root.left, targetSum, sumTillNow + root.val);
+    //     if (left) {
+    //         return true;
+    //     }
+    //     return helper(root.right, targetSum, sumTillNow + root.val);
+    // }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/sum-root-to-leaf-numbers/
+    public int sumNumbers(TreeNode root) {
+        helpersumNumbers(root, 0);
+        return sum;
+        // return helper2(root, 0);
+    }
+
+    int sum = 0;
+    void helpersumNumbers(TreeNode root, int sumTillNow) { // SOLUTION 1 - it will use an extra variable 'sum'
+        if(root == null) return;
+        if(root.left == null && root.right == null) {
+            sumTillNow = root.val + (sumTillNow * 10);
+            // sumTillNow += root.val;
+            sum += sumTillNow;
+        }
+        helpersumNumbers(root.left, root.val + (sumTillNow *10));
+        helpersumNumbers(root.right, root.val + (sumTillNow * 10));
+    }
+
+    int helper2(TreeNode root, int sumTillNow) { // SOLUTION 2
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) {
+            return root.val + (sumTillNow * 10);
+        }
+        return helper2(root.left, root.val + (sumTillNow *10)) + helper2(root.right, root.val + (sumTillNow * 10));
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/binary-tree-maximum-path-sum/
+    int max = 0;
+    public int maxPathSum(TreeNode root) { // FACEBOOK QUESTION
+        max = root.val;
+        helpermaxPathSum(root);
+        return max;
+    }
+
+    int helpermaxPathSum(TreeNode root) {
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) { 
+            if(root.val > max) max = root.val; 
+            return root.val;
+        }
+        int left = helpermaxPathSum(root.left);
+        left = (left < 0) ? 0 : left;
+
+        int right = helpermaxPathSum(root.right);
+        right = (right < 0) ? 0 : right;
+
+        int sum = root.val + left + right;
+        if(sum > max) max = sum;
+
+        return Math.max(left, right) + root.val;
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public boolean findPath(TreeNode root, int[] path) { // You will be given an array of paths from root to leaf node, check if it is an valid path
+        return helperFindPath(root, path, 0);
+    }
+
+    boolean helperFindPath(TreeNode root, int[] path, int index) {
+        if(root == null) return path.length == 0;
+        if(root.left == null && root.right == null && index == path.length - 1) return true;
+        if(root.val != path[index]) return false;
+
+        return helperFindPath(root.left, path, index + 1) || helperFindPath(root.right, path, index + 1);
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    int countPath(TreeNode root, int sum) {
+        List<Integer> paths = new ArrayList<Integer>();
+        return helper(root, sum, paths);
+    }
+
+    int helper(TreeNode root, int sum, List<Integer> paths) {
+        if(root == null) return 0;
+        paths.add(root.val);
+        int count = 0;
+        int s = 0; 
+        ListIterator<Integer> itr = paths.listIterator(paths.size());
+        while(itr.hasPrevious()) {
+            s = s + itr.previous();
+            if (s == sum) {
+                count++;
+            }
+        }
+
+        count += helper(root.left, sum, paths) + helper(root.right, sum, paths);
+        paths.remove(paths.size() - 1);
+        return count;
+    }
+
+
+
+    List<List<Integer>> findPaths(TreeNode root, int sum) {
+        List<List<Integer>> path = new ArrayList<List<Integer>>();
+        List<Integer> paths = new ArrayList<Integer>();
+        helper(root, sum, paths, path);
+        return path;
+    }
+
+    void helper(TreeNode root, int sum, List<Integer> paths, List<List<Integer>> path) {
+        if(root == null) return ;
+        paths.add(root.val);
+        if(root.val == sum && root.left == null && root.right == null) {
+            path.add(new ArrayList<>(paths));
+
+        } else {
+            helper(root.left, sum - root.val, paths, path);
+            helper(root.right, sum - root.val, paths, path);
+        }
+        paths.remove(paths.size() - 1);
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
