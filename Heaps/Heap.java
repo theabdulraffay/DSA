@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 class MaxHeap {
 	// collection of item get retrieve in log(N) time
 	// parent[i] = (i - 1) / 2;
@@ -106,6 +107,14 @@ class MaxHeap {
 		}
 		System.out.println();
 	}
+
+	public ArrayList<Integer> heapSort() {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(!isEmpty()) {
+			list.add(delete());
+		}
+		return list;
+	}
 	
 }
 
@@ -128,6 +137,8 @@ class Heap {
 		System.out.println(h.delete());
 		System.out.println(h.delete());
 		h.display();
+		System.out.println(h.heapSort());
+
 
 
 
