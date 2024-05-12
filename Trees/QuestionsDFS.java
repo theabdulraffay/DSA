@@ -2,6 +2,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
@@ -88,8 +90,8 @@ class BST {
 
     public TreeNode invertTree2(TreeNode root) { // Using POST - ORDER
         if(root == null) return null;
-        TreeNode left = invertTree(root.left); // first move to the left
-        TreeNode right = invertTree(root.right);
+        TreeNode left = invertTree2(root.left); // first move to the left
+        TreeNode right = invertTree2(root.right);
         root.left = right; // then changes the root node
         root.right = left;
         return root;
@@ -316,6 +318,122 @@ class BST {
         return root;
     }
 }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/delete-node-in-a-bst/description/
+    TreeNode helperDeleteNode(TreeNode root) {
+        if(root.right == null) return root.left;
+        else if(root.left == null) return root.right;
+        else {
+            TreeNode left = root.left;
+            TreeNode right = root.right;
+            TreeNode topright = left;
+            while(topright.right != null) {
+                topright = topright.right;
+            }
+            topright.right = right;
+            return left;
+
+        }
+    }
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null) return null;
+        if(root.val == key) return helperDeleteNode(root);
+        else {
+            TreeNode temp = root;
+            while(root != null) {
+                if(root.val > key) {
+                    if(root.left != null && root.left.val == key) {
+                        root.left = helperDeleteNode(root.left);
+                        break;
+                    }
+                    root = root.left;
+                }
+                else {
+                    if(root.right != null && root.right.val == key) {
+                        root.right = helperDeleteNode(root.right);
+                        break;
+                    }
+                    root = root.right;
+                }
+            }
+            return temp;
+        }
+        
+    }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// https://leetcode.com/problems/trim-a-binary-search-tree/
+    TreeNode helperTrimBST(TreeNode root) {
+        if(root.left == null) return root.right;
+        else if(root.right == null) return root.left;
+        else {
+            TreeNode left = root.left;
+            TreeNode right = root.right;
+            TreeNode topright = left;
+            while(topright.right != null) {
+                topright = topright.right;
+            }
+            topright.right = right;
+            return left;
+        }
+    }
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        Queue<TreeNode> que = new LinkedList<>();
+        while(root != null && (root.val < low || root.val > high)) {
+            root = helperTrimBST(root);
+        }
+        if(root != null)que.add(root);
+        while(!que.isEmpty()) {
+            int size = que.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode temp = que.poll();
+                while(temp.left != null && (temp.left.val < low || temp.left.val > high)) {
+                    temp.left = helperTrimBST(temp.left);
+                }
+                if(temp.left != null)que.add(temp.left);
+
+                while(temp.right != null && (temp.right.val < low || temp.right.val > high)) {
+                    temp.right = helperTrimBST(temp.right);
+                }
+                if(temp.right != null)que.add(temp.right);
+            }
+        }
+        return root;
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/balance-a-binary-search-tree/
+    public TreeNode balanceBST(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        tolist(root, list);
+        return insert(list, 0, list.size() - 1);
+        
+    }
+    void tolist (TreeNode root, ArrayList<Integer> list) {
+        if(root == null) return;
+        tolist(root.left, list);
+        list.add(root.val);
+        tolist(root.right, list);
+    }
+
+    TreeNode insert(ArrayList<Integer> nums, int st, int end) {
+        if(st > end) {
+            return null;
+        }
+        int mid = (st + end) / 2;
+        TreeNode root = new TreeNode(nums.get(mid)); 
+        root.left = insert(nums, st, mid - 1);
+        root.right = insert(nums, mid + 1, end);
+        return root;
+    }
+    
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                                                                         // Path Questions
@@ -457,7 +575,8 @@ public boolean hasPathSum(TreeNode root, int targetSum) { // AMAZON QUESTION
         }
         paths.remove(paths.size() - 1);
     }
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }

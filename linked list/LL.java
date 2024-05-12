@@ -279,6 +279,7 @@ public class LL{
     // https://leetcode.com/problems/linked-list-random-node/description/
     // https://leetcode.com/problems/merge-nodes-in-between-zeros/
     // https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+    // https://leetcode.com/problems/design-linked-list/description/
     public Node detectCycle(Node head){
     	int length = lengthOfCycle(head);
     	if(length == 0)return null;

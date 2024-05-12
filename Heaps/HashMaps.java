@@ -2,6 +2,10 @@ class MapUsingHash {
 	// used in variable assignment in memory, netwroking, cryptography etc
 	// imagine we are woking with arrrays in hashmaps, we first find the hashcode of the key on the hashmap, then after getting the hashcode we put the key into that index of the array, if the hashcpde is to large we perform hashing, hashing give the smaller value for the hashcode, nd then we put the value to that particluar index of array, we time we have to deal with collison after getting hashed value, 
 	// we deal with collion in 2 different ways, i. chaining, ii. open addressing
+	/* it is implemented using array of linked list - chaining concept is valid here
+	 each index of array which again has a linked list is called bucket 
+	 
+	*/
 
 	private class Entity {
 		String key;

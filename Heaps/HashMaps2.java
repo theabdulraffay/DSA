@@ -26,7 +26,15 @@ class MapUsingLinkedLint {
 			return;
 		}
 		while(temp.next != null) {
+			if(temp.key.equals(key)) {
+				temp.value = value;
+				return;
+			}
 			temp = temp.next;
+		}
+		if(temp.key.equals(key)) {
+				temp.value = value;
+				return;
 		}
 		temp.next = new Entity(key, value);
 	}
@@ -44,6 +52,9 @@ class MapUsingLinkedLint {
 	public void remove(String key) {
 		int hash = Math.abs(key.hashCode() % entities.length); 
 		Entity head = entities[hash];
+		if(head == null) {
+			return;
+		}
 		if(head.key.equals(key)) {
 			entities[hash] = head.next;
 			return;
