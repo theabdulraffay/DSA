@@ -429,7 +429,66 @@ class BST {
     
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+
+    ListNode getmid(ListNode head) {
+        if(head == null) return null;
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prev = null; 
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            prev = slow;
+            slow = slow.next;
+        }
+        if(prev == null) head = null;
+        else prev.next = null;
+        return slow;
+    }
+
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null) return null;
+
+        ListNode mid = getmid(head);
+        TreeNode root = new TreeNode(mid.val);
+        if(head == mid){
+            return root;
+        }
+        root.left = sortedListToBST(head);
+        root.right = sortedListToBST(mid.next);
+        return root;
+        
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/maximum-binary-tree/
+    TreeNode helper(int[] nums,int st, int en) {
+        if(st > en) return null;
+        int max = nums[st];
+        int index = st;
+        for(int i = st; i <= en; i++) {
+            if(nums[i] > max) {
+                max = nums[i];
+                index = i;
+            }
+        }
+
+        TreeNode root = new TreeNode(max);
+        root.left = helper(nums, st, index - 1);
+        root.right = helper(nums, index + 1, en);
+        return root;
+    }
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return helper(nums, 0, nums.length - 1);
+        
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------

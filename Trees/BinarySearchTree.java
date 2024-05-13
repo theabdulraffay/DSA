@@ -103,12 +103,12 @@ class BinarySearchTree {
     // https://leetcode.com/problems/delete-node-in-a-bst/description/
     public static void main(String[] args) {
     	// insert(5);
-    	// insert(4);
+    	insert(4);
     	// insert(56);
     	// insert(1);
     	// insert(1);
     	// insert(7);
-    	populateSorted(new int[] {1,2,3,4,5,6,7,8,9});
+    	// populateSorted(new int[] {1,2,3,4,5,6,7,8,9});
     	display();
 
     }
