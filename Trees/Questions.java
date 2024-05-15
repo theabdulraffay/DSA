@@ -435,7 +435,94 @@ class BST {
         
     }
 // -----------------------------------------------------------------------------------------------------------------------------
+// https://leetcode.com/problems/complete-binary-tree-inserter/description/
+class CBTInserter {
+    ArrayList<Node> l = new ArrayList<>();
+
+    public CBTInserter(Node root) {
+        Queue<Node> que = new LinkedList<Node>();
+        l.add(root);
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            for(int i = 0; i < size; i++) {
+                Node temp = que.poll();
+                if(temp.left != null) {
+                    que.add(temp.left);
+                    l.add(temp.left);
+                }
+
+                if(temp.right != null) {
+                    que.add(temp.right);
+                    l.add(temp.right);
+                }
+            }
+        }
+    }
+    
+    public int insert(int val) {
+        int parent = (l.size() - 1) / 2;
+        Node temp = l.get(parent);
+        if (l.size() % 2 == 0) {
+            temp.right = new Node(val);
+            l.add(temp.right);
+        } else {
+            temp.left = new Node(val);
+            l.add(temp.left);
+        }
+        return temp.val;
+    }
+    
+    public Node get_root() {
+        return l.get(0);
+        
+    }
+}
+
+class CBTInserter2 {
+    Node root;
+
+    public CBTInserter2(Node root) {
+        this.root = root;
+        
+    }
+    
+    public int insert(int val) {
+        Queue<Node> que = new LinkedList<Node>();
+        que.add(root);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            for(int i = 0; i < size; i++) {
+                Node temp = que.poll();
+                if(temp.left != null) {
+                    que.add(temp.left);
+                } else {
+                    temp.left = new Node(val);
+                    return temp.val;
+                }
+
+
+                if(temp.right != null) {
+                    que.add(temp.right);
+                } else {
+                    temp.right = new Node(val);
+                    return temp.val;
+                }
+            }
+        }
+        return 0;
+        
+    }
+    
+    public Node get_root() {
+        return root;
+        
+    }
+}
+
+
 // -----------------------------------------------------------------------------------------------------------------------------
+
 // -----------------------------------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------------------------
 }
