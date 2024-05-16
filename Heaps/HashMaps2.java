@@ -1,5 +1,6 @@
 import java.util.*;
 class MapUsingLinkedLint {
+	// https://leetcode.com/problems/map-sum-pairs/description/
 	private class Entity {
 		String key;
 		String value;
