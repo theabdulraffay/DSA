@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Collections;
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
@@ -543,6 +544,87 @@ class BST {
         
     }
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/all-elements-in-two-binary-search-trees/description/
+    List<Integer> l = new ArrayList<Integer>();
+    void insert(TreeNode r1) {
+        if(r1 == null) return;
+        insert(r1.left);
+        l.add(r1.val);
+        insert(r1.right);
+    }
+
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        insert(root1);
+        insert(root2);
+        Collections.sort(l);
+        return l;
+    }
+
+    void insertElement(TreeNode r1, List<Integer> m ) {
+        if(r1 == null) return;
+        insertElement(r1.left, m);
+        m.add(r1.val);
+        insertElement(r1.right, m);
+    }
+
+
+
+    public List<Integer> getAllElements2(TreeNode root1, TreeNode root2) {
+        List<Integer> m = new ArrayList<Integer>();
+        insertElement(root1, m);
+        List<Integer> n = new ArrayList<Integer>();
+        insertElement(root2, n);
+
+        List<Integer> toRet = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+
+        while(i < m.size() && j < n.size()) {
+            if(m.get(i) < n.get(j)) {
+                toRet.add(m.get(i));
+                i++;
+            } else {
+                toRet.add(n.get(j));
+                j++;
+            }
+        }
+
+        while(i < m.size()) {
+            toRet.add(m.get(i++));
+        }
+
+        while(j < n.size()) {
+            toRet.add(n.get(j++));
+        }
+
+
+
+
+        // Collections.sort(l);
+        return toRet;
+    }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/leaf-similar-trees/
+    void insertLeafSimilar(TreeNode r, List<Integer> l) {
+        if(r == null) return;
+        if(r.left == null && r.right == null) l.add(r.val);
+        insertLeafSimilar(r.left, l);
+        insertLeafSimilar(r.right, l);
+    }
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> l = new ArrayList<>();
+        insertLeafSimilar(root1, l);
+        List<Integer> s = new ArrayList<>();
+        insertLeafSimilar(root2,s);
+        return l.equals(s);  
+    }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
