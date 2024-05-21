@@ -132,10 +132,10 @@ class Heap {
 		h.insert(18);
 		h.insert(37);
 		h.display();
-		System.out.println(h.delete());
-		System.out.println(h.delete());
-		System.out.println(h.delete());
-		System.out.println(h.delete());
+		// System.out.println(h.delete());
+		// System.out.println(h.delete());
+		// System.out.println(h.delete());
+		// System.out.println(h.delete());
 		h.display();
 		System.out.println(h.heapSort());
 

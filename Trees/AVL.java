@@ -136,8 +136,8 @@ class AVL2 {
 		child.right = node; 
 		node.left = t; 
 
-		node.height = Math.max(height(node.left), height(node.right) + 1);
-		child.height = Math.max(height(child.left), height(child.right) + 1);
+		node.height = Math.max(height(node.left), height(node.right)) + 1;
+		child.height = Math.max(height(child.left), height(child.right)) + 1;
 		return child; 
 	}
 
@@ -148,9 +148,66 @@ class AVL2 {
 		child.left = node; 
 		node.right = t; 
 
-		node.height = Math.max(height(node.left), height(node.right) + 1);
-		child.height = Math.max(height(child.left), height(child.right) + 1);
+		node.height = Math.max(height(node.left), height(node.right)) + 1;
+		child.height = Math.max(height(child.left), height(child.right)) + 1;
 		return child; 
+	}
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    void updateheight(Node top, Node bottom) {
+    	if(top == bottom.right) return;
+    	updateheight(top.right, bottom);
+    	System.out.println();
+    	if(height(top.right) > 1) {
+    		top.right = rotate(top.right);
+    	}
+    	top.height = Math.max(height(top.left), height(top.right)) + 1;
+    }
+    Node helperDeleteNode(Node root) {
+        if(root.right == null) return root.left;
+        else if(root.left == null) return root.right;
+        else {
+            Node left = root.left;
+            Node right = root.right;
+            Node topright = left;
+            while(topright.right != null) {
+                topright = topright.right;
+            }
+            topright.right = right;
+
+            updateheight(left, topright);
+            return rotate(left);
+
+        }
+    }
+    public void deleteNode(int key) {
+    	deleteNode(root, key);
+
+    }
+	void deleteNode(Node node, int key) {
+		if(node == null) return;
+		if(node.val == key) {
+			root = helperDeleteNode(node);
+			return;
+		}
+		if(node.val > key) {
+			if(node.left != null && node.left.val == key) {
+				node.left = helperDeleteNode(node.left);
+				node.height = Math.max(height(node.left), height(node.right)) + 1;
+				return;
+			}
+			deleteNode(node.left, key);
+       	}
+       	else {
+       		if(node.right != null && node.right.val == key) {
+				node.right = helperDeleteNode(node.right);
+				node.height = Math.max(height(node.left), height(node.right)) + 1;
+				return;
+			}
+			deleteNode(node.right, key);
+       	}
+		node.height = Math.max(height(node.left), height(node.right)) + 1;
+		rotate(node);
 	}
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -217,6 +274,15 @@ class AVL2 {
     // 	System.out.println(height(root));
 
     // }
+    void inorder() {
+    	inorder(root);
+    }
+    void inorder(Node root) {
+    	if(root == null) return;
+    	inorder(root.left);
+    	System.out.println(root.val + " " + root.height);
+    	inorder(root.right);
+    }
 
 }
 
@@ -224,11 +290,14 @@ class AVL {
 	public static void main(String[] args) {
     AVL2 tree = new AVL2();
 
-    for(int i=0; i < 50; i++) {
+    for(int i=1; i < 7; i++) {
       tree.insert(i);
     }
-
-    System.out.println(tree.height());
-    tree.prettyDisplay();
+    // tree.inorder();
+    // System.out.println(tree.height());
+    tree.deleteNode(4);
+    tree.inorder();
+    // tree.prettyDisplay();
+    // System.out.println(tree.isBalance());
   }
 }
