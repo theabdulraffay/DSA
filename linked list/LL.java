@@ -953,6 +953,59 @@ public class LL{
         return IterativeRecursion(head);
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/add-two-numbers-ii/description/
+    Node reverseAddTwoNumbers(Node head) {
+        Node prev = null;
+        while(head != null) {
+            Node next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+    public Node addTwoNumbers2(Node l1, Node l2) {
+        Node l = reverseAddTwoNumbers(l1);
+        Node m = reverseAddTwoNumbers(l2);
+
+        Node n = new Node (-1);
+        Node head = n;
+
+        int carry = 0;
+        while(l != null && m != null) {
+            int sum = l.value + m.value + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            n.next = new Node (sum);
+            n = n.next;
+            l = l.next;
+            m = m.next;
+        }
+
+        while(l != null) {
+            int sum = l.value + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            n.next = new Node (sum);
+            n = n.next;
+            l = l.next;
+        }
+
+        while(m != null) {
+            int sum = m.value + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            n.next = new Node (sum);
+            n = n.next;
+            m = m.next;
+        }
+
+        if(carry == 1) {
+            n.next = new Node (1);
+        }
+
+        return reverseAddTwoNumbers(head.next);
+    }
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
