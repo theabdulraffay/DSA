@@ -662,7 +662,65 @@ class BST {
     // https://leetcode.com/problems/binary-tree-preorder-traversal/
     // https://leetcode.com/problems/binary-tree-inorder-traversal/
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/find-bottom-left-tree-value/
+    public int findBottomLeftValue2(TreeNode root) { // Using iteration
+        Queue<TreeNode> que = new LinkedList<>();
+        que.add(root);
+        int toret = 0;
+        while(!que.isEmpty()) {
+            TreeNode te = que.poll();
+            toret = te.val;
+            if(te.right != null) que.add(te.right);
+            if(te.left != null) que.add(te.left);
+        }
+        return toret;
+    }
+
+
+
+
+
+
+    int ans = -1;
+    int depth = -1;
+    public int findBottomLeftValue(TreeNode root) { // Using recursion 
+        helperFindBottomLeftValue(root, 0);
+        return ans;
+    }
+    void helperFindBottomLeftValue(TreeNode root, int height) {
+        if(root == null) return;
+        if(height > depth) {
+            depth = height;
+            ans = root.val;
+        }
+
+        helperFindBottomLeftValue(root.left, height + 1);
+        helperFindBottomLeftValue(root.right, height + 1);
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/find-largest-value-in-each-tree-row/
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> toret = new ArrayList<>();
+        if(root == null) return toret;
+
+        Queue<TreeNode> que = new LinkedList<>();
+        que.add(root);
+        while(!que.isEmpty()) {
+            int max = Integer.MIN_VALUE;
+            int n = que.size();
+            for(int i = 0; i < n;i++) {
+                TreeNode te = que.poll();
+                if(te.val > max) {
+                    max = te.val;
+                }
+                if(te.left != null) que.add(te.left);
+                if(te.right != null) que.add(te.right);
+            }
+            toret.add(max);
+        }
+        return toret;
+        
+    }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
