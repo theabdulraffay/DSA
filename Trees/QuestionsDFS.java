@@ -805,10 +805,43 @@ class BST {
             return false;
         }
         return isBalanced(root.right);
-        
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/convert-bst-to-greater-tree/
+    // https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
+    int helperConvertBST(TreeNode root, int sum) {
+        if(root == null) return sum;
+        int right = helperConvertBST(root.right, sum);
+        int left = helperConvertBST(root.left, root.val + right);
+        root.val += right;
+        return left;
+    }
+    public TreeNode convertBST(TreeNode root) { // Using no additional vairiable
+        helperConvertBST(root, 0);
+        return root;   
+    }
+
+
+
+    int sumBST = 0;
+    void helperConvertBST(TreeNode root) {
+        if(root == null) return;
+        helperConvertBST(root.right);
+        sumBST += root.val;
+        root.val = sumBST;
+        helperConvertBST(root.left);
+    }
+    public TreeNode convertBST2(TreeNode root) { // using one additional variable
+        helperConvertBST(root);
+        // if(root == null) return null;
+        // convertBST2(root.right);
+        // sumBST += root.val;
+        // root.val = sumBST;
+        // convertBST2(root.left);
+        return root;   
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
