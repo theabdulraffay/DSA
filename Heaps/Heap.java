@@ -36,6 +36,19 @@ class MaxHeap {
 		
 	}
 
+	
+
+	void upheap(int index) {
+		if(index == 0) return;
+		int parent = parent(index);
+		if(list[parent] < list[index]) {
+			int temp = list[parent];
+			list[parent] = list[index];
+			list[index] = temp;
+			upheap(parent);
+		}
+	}
+
 	void insert(int key) {
 		if(isFull()) {
 			System.out.println("Full");
@@ -53,18 +66,6 @@ class MaxHeap {
 		// 	tempptr = parent;
 		// 	parent = (tempptr - 1) / 2;
 		// }
-	}
-
-	void upheap(int index) {
-		if(index == 0) return;
-		int parent = parent(index);
-		if(list[parent] < list[index]) {
-			int temp = list[parent];
-			list[parent] = list[index];
-			list[index] = temp;
-			upheap(parent);
-		}
-
 	}
 
 	int delete() {
