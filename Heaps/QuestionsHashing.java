@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map.Entry;
 import java.util.Arrays;
+import java.util.*;
+import java.util.Comparator;
 class QuestionsHashing {
 	public List<Integer> majorityElement(int[] nums) {
      	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -294,7 +296,54 @@ class QuestionsHashing {
     }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/top-k-frequent-elements/
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+
+        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(map.entrySet());
+        entryList.sort(Comparator.comparingInt(Map.Entry::getValue));
+
+        // Sort the list using a comparator that compares the values
+        // entryList.sort(Map.Entry.comparingByValue());
+        int[] toret = new int[k];
+        int i = 0;
+        while(k-- > 0) {
+            toret[i] = entryList.get(entryList.size() - 1- i).getKey();
+            i++;
+        }
+
+        return toret;
+        
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/sort-characters-by-frequency/description/
+    public String frequencySort(String s) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            char te = s.charAt(i);
+            map.put(te, map.getOrDefault(te, 0) + 1);
+        }
+
+        List<Map.Entry<Character, Integer>> freqList = new ArrayList<>(map.entrySet());
+        freqList.sort(Comparator.comparingInt(Map.Entry::getValue));
+
+        StringBuilder str = new StringBuilder();
+
+        for(int i = freqList.size() - 1; i >= 0; i--) {
+            int freq = freqList.get(i).getValue();
+            char ch = freqList.get(i).getKey();
+            for (int j = 0; j < freq; j++) {
+                str.append(ch);
+            }
+        }
+        return str.toString();
+        
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
