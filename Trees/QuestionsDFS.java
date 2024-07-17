@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Collections;
+import java.util.HashSet;
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
@@ -995,6 +996,38 @@ public boolean hasPathSum(TreeNode root, int targetSum) { // AMAZON QUESTION
     }
 
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    List<TreeNode> toret;
+    HashSet<Integer> set;
+    TreeNode recursion(TreeNode root) {
+        if(root == null) return null;
+        root.left = recursion(root.left);
+        root.right = recursion(root.right);
+        if(set.contains(root.val)) {
+            if(root.left != null) toret.add(root.left);
+            if(root.right != null) toret.add(root.right);
+            return null;
+        }
+        return root;
+
+    }
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        toret= new ArrayList<>();
+         set = new HashSet<>();
+        for(int i : to_delete)set.add(i);
+        recursion(root);
+        if(!set.contains(root.val)) toret.add(root);
+        return toret;
+        
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 }
