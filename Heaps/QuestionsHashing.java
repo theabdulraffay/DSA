@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import java.util.Arrays;
 import java.util.*;
 import java.util.Comparator;
+import java.util.Random;
+
 
 class QuestionsHashing {
 	public List<Integer> majorityElement(int[] nums) {
@@ -838,6 +840,32 @@ class RandomizedSet {
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// https://leetcode.com/problems/random-pick-index/
+class RandomPick {
+    int[] arr;
+    HashMap<Integer, List<Integer>> map;
+    Random rand;
+
+    public RandomPick(int[] nums) {
+        arr = nums;
+        rand = new Random();
+        map = new HashMap<>();
+        for(int i = 0; i < arr.length; i++) {
+            if(!map.containsKey(arr[i])) {
+                map.put(arr[i], new ArrayList<>());
+            }
+            map.get(arr[i]).add(i);
+        }
+    }
+    
+    public int pick(int target) {
+        List<Integer> temp = map.get(target);
+        int index = rand.nextInt(temp.size());
+        return temp.get(index);
+        
+    }
+}
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
