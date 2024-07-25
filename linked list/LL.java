@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 public class LL{
 	Node head;
 	Node tail;
@@ -1052,6 +1053,22 @@ class NodeRandom {
     }
 
     // -------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/intersection-of-two-linked-lists/
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        HashSet<ListNode> set = new HashSet<>();
+        while(headA != null) {
+            set.add(headA);
+            headA = headA.next;
+        }
+
+        while(headB != null) {
+            if(set.contains(headB)) return headB;
+            headB = headB.next;
+        }
+        return null;
+        
+    }
+
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -1068,4 +1085,13 @@ class NodeRandom {
 		list.insertLast(7);
 		list.display();
 	}
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
 }
