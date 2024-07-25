@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 public class LL{
 	Node head;
 	Node tail;
@@ -1007,6 +1008,49 @@ public class LL{
         return reverseAddTwoNumbers(head.next);
     }
     // -------------------------------------------------------------------------------------------------------------------------------------------
+// https://leetcode.com/problems/copy-list-with-random-pointer/
+    // Definition for a Node.
+class NodeRandom {
+    int val;
+    NodeRandom next;
+    NodeRandom random;
+
+    public NodeRandom(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+    public NodeRandom copyRandomList(NodeRandom head) {
+        NodeRandom toret = new NodeRandom(-1);
+        HashMap<NodeRandom, Integer> index = new HashMap<>();
+        HashMap<Integer, NodeRandom> map = new HashMap<>();
+        int ind = 0;
+        NodeRandom temp = head;
+        NodeRandom head2 = toret;
+        while(head != null) {
+            toret.next = new NodeRandom(head.val);
+            map.put(ind, toret.next);
+            index.put(head, ind++);
+            head = head.next;
+            toret = toret.next;
+        }
+        head2 = head2.next;
+        toret = head2;
+
+        while(temp != null) {
+            if(temp.random != null) {
+                int in = index.get(temp.random);
+                NodeRandom another = map.get(in);
+                toret.random = another;
+            }
+            toret = toret.next;
+            temp = temp.next;
+        }
+        return head2;
+        
+    }
+
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------------------------------------------------------------
