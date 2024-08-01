@@ -384,12 +384,30 @@ class SlidingWindow {
             if(i < nums.length)sum += nums[i];
             i++;
         }
-        return max == -1 ? -1 : nums.length - max;
+        return max == -1 ? -1 : nums.length - max; // if max is unchanged this means we cannot find max subarray of desired value so we return -1
 
         
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
+    public int numberOfSubstrings(String s) {
+        int count = 0;
+        int i = 0;
+        int left = 0;
+        int n = s.length();
+        int[] arr =new int[3];
+        while(i < n) {
+            char c = s.charAt(i);
+            arr[c - 'a']++;
+            while(arr[0] >= 1 && arr[1] >= 1 && arr[2] >= 1) {
+                count += (n - i);
+                arr[s.charAt(left++) - 'a']--;
+            }
+            i++;
+        }
+        return count;   
+    }
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
