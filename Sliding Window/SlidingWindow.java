@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.Collections;
 class SlidingWindow {
 	// https://leetcode.com/problems/maximum-average-subarray-i/
     public double findMaxAverage(int[] nums, int k) {
@@ -286,6 +287,29 @@ class SlidingWindow {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/
+    int check(String s, char c, int k) {
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) != c)list.add(i);
+        }
+        if(list.size() <= k) return s.length();
+        list.add(s.length());
+        int max = 0;
+        max = list.get(k);
+        for(int i = k + 1; i < list.size(); i++) {
+            int num = list.get(i) - (list.get(i - k - 1) + 1);
+            max = Math.max(max, num);
+        }
+        return max;
+
+    }
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+
+        return Math.max(check(answerKey, 'T', k), check(answerKey, 'F', k));
+        
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/minimum-size-subarray-sum/
     public int minSubArrayLen(int target, int[] nums) {
         int i = 0;
@@ -502,29 +526,34 @@ class SlidingWindow {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // https://leetcode.com/problems/maximize-the-confusion-of-an-exam/description/
-    int check(String s, char c, int k) {
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) != c)list.add(i);
+    // https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/
+    public int rangeSum(int[] nums, int n, int left, int right) {
+        ArrayList<Integer> que = new ArrayList<>();
+        int k = 1;
+        for(int i=0; i<n; i++){
+            int sum = 0; 
+            for(int j=i; j<n; j++){
+                sum += nums[j];
+                que.add(sum);
+            }
         }
-        if(list.size() <= k) return s.length();
-        list.add(s.length());
-        int max = 0;
-        max = list.get(k);
-        for(int i = k + 1; i < list.size(); i++) {
-            int num = list.get(i) - (list.get(i - k - 1) + 1);
-            max = Math.max(max, num);
+        // while(k++ < left) {
+        //     que.poll();
+        // }
+        int sum = 0;
+        int mod = 1000000007;
+        // while(k++ <= right + 1) {
+        //     sum = (sum + que.poll()) % mod; 
+        // }
+        Collections.sort(que);
+        for(int i = left - 1; i < right; i++) {
+
+            sum = (sum + que.get(i )) % mod; 
         }
-        return max;
+        return sum;
 
-    }
-    public int maxConsecutiveAnswers(String answerKey, int k) {
-
-        return Math.max(check(answerKey, 'T', k), check(answerKey, 'F', k));
         
     }
-
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
