@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 class SlidingWindow {
 	// https://leetcode.com/problems/maximum-average-subarray-i/
     public double findMaxAverage(int[] nums, int k) {
@@ -749,6 +751,30 @@ class SlidingWindow {
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/sliding-window-maximum
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(k == 1) return nums;
+        int n = nums.length;
+        Deque<Integer> que = new LinkedList();
+        int[] toret = new int[n - k + 1];
+        int l = k;
+        for(int i = 0; i < n; i++) {
+            int num = nums[i];
+            while(!que.isEmpty() && que.getLast() < num) {
+                que.pollLast();
+            }
+            que.addLast(num);
+
+            if(i >= k && nums[i - k] == que.getFirst()) {
+                que.pollFirst();
+            }
+            if(i >= k - 1){
+                toret[i - k + 1] = que.getFirst();
+            }
+        }
+        return toret;
+    }
+
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
