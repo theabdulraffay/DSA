@@ -896,6 +896,7 @@ class SlidingWindow {
 
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/find-the-power-of-k-size-subarrays-i/
+    // https://leetcode.com/problems/alternating-groups-ii/
     public int[] resultsArray(int[] nums, int k) {
         if(k == 1) return nums;
         int n = nums.length;
