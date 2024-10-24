@@ -30,7 +30,6 @@ class CustomTrie {
 
     CustomTrie() {
         root = new Node();
-
     }
 
     void insert(String word) {
