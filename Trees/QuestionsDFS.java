@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
 //https://www.geeksforgeeks.org/top-50-tree-coding-problems-for-interviews/
@@ -700,6 +701,28 @@ class BST {
         helperFindBottomLeftValue(root.left, height + 1);
         helperFindBottomLeftValue(root.right, height + 1);
     }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/
+    public long kthLargestLevelSum(TreeNode root, int k) {
+        Queue<TreeNode> que = new LinkedList<>();
+        PriorityQueue<Long> pque = new PriorityQueue<>();
+        que.add(root);
+        while(!que.isEmpty()) {
+            int n = que.size();
+            long sum = 0;
+            for(int i = 0; i < n; i++) {
+                TreeNode temp = que.poll();
+                sum += temp.val;
+                if (temp.left != null) que.add(temp.left);
+                if (temp.right != null) que.add(temp.right);
+            }
+            pque.add(sum);
+            if(pque.size() > k) pque.poll(); 
+        }
+        return pque.size() < k ? -1 : pque.peek();
+        
+    }
+
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // https://leetcode.com/problems/find-largest-value-in-each-tree-row/
     public List<Integer> largestValues(TreeNode root) { // Using iteration
