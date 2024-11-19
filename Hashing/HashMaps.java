@@ -4,7 +4,6 @@ class MapUsingHash {
 	// we deal with collion in 2 different ways, i. chaining, ii. open addressing
 	/* it is implemented using array of linked list - chaining concept is valid here
 	 each index of array which again has a linked list is called bucket 
-	 
 	*/
 
 	private class Entity {
