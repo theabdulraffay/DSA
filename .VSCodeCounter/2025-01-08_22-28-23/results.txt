@@ -1,0 +1,88 @@
+Date : 2025-01-08 22:28:23
+Directory : c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA
+Total : 46 files,  7454 codes, 1390 comments, 1367 blanks, all 10211 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         46 |      7,454 |      1,390 |      1,367 |     10,211 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                               | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                  |         46 |      7,454 |      1,390 |      1,367 |     10,211 |
+| Arrays                                                                                                                             |          2 |        130 |         45 |         23 |        198 |
+| Binary Search                                                                                                                      |          2 |        291 |        145 |         48 |        484 |
+| Dynamic Programming                                                                                                                |          1 |        115 |         59 |         24 |        198 |
+| Hashing                                                                                                                            |          4 |      1,007 |        135 |        212 |      1,354 |
+| Heaps                                                                                                                              |          2 |        210 |         67 |         53 |        330 |
+| Prefix Sum                                                                                                                         |          1 |         60 |         17 |         13 |         90 |
+| Recursion                                                                                                                          |         14 |        971 |        106 |        160 |      1,237 |
+| Recursion (Files)                                                                                                                  |          1 |         72 |         14 |         15 |        101 |
+| Recursion\1. Beginner                                                                                                              |          1 |         75 |         24 |         17 |        116 |
+| Recursion\2. Arrays                                                                                                                |          1 |         54 |          5 |          6 |         65 |
+| Recursion\3. Patterns                                                                                                              |          2 |         70 |          0 |          7 |         77 |
+| Recursion\4. Subset, Subsequence, String                                                                                           |          4 |        318 |         40 |         56 |        414 |
+| Recursion\5. Backtracking, Maze                                                                                                    |          5 |        382 |         23 |         59 |        464 |
+| Sliding Window                                                                                                                     |          1 |        758 |        167 |        135 |      1,060 |
+| Stacks & Queues                                                                                                                    |          7 |        751 |        144 |        133 |      1,028 |
+| Trees                                                                                                                              |          6 |      1,769 |        314 |        330 |      2,413 |
+| Trie                                                                                                                               |          1 |        107 |          3 |         21 |        131 |
+| linked list                                                                                                                        |          5 |      1,285 |        188 |        215 |      1,688 |
++------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                           | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Arrays\SpiralMatrix.java                                  | Java     |         76 |         40 |         14 |        130 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Arrays\SubArray.java                                      | Java     |         54 |          5 |          9 |         68 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Binary Search\BS.java                                     | Java     |        248 |        145 |         44 |        437 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Binary Search\MergeArray.java                             | Java     |         43 |          0 |          4 |         47 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Dynamic Programming\DP.java                               | Java     |        115 |         59 |         24 |        198 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Hashing\HashMaps.java                                     | Java     |         46 |          6 |         15 |         67 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Hashing\HashMaps2.java                                    | Java     |        167 |          1 |         27 |        195 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Hashing\HuffmanCoding.java                                | Java     |         85 |         15 |         24 |        124 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Hashing\QuestionsHashing.java                             | Java     |        709 |        113 |        146 |        968 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Heaps\Heap.java                                           | Java     |        174 |         59 |         48 |        281 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Heaps\KarpRabin.java                                      | Java     |         36 |          8 |          5 |         49 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Prefix Sum\PrefixSum.java                                 | Java     |         60 |         17 |         13 |         90 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\1. Beginner\Recursion.java                      | Java     |         75 |         24 |         17 |        116 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\2. Arrays\Recursion2.java                       | Java     |         54 |          5 |          6 |         65 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\3. Patterns\BubbleSort.java                     | Java     |         37 |          0 |          5 |         42 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\3. Patterns\Recursion.java                      | Java     |         33 |          0 |          2 |         35 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\4. Subset, Subsequence, String\Permutation.java | Java     |        120 |         14 |         21 |        155 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\4. Subset, Subsequence, String\Questions.java   | Java     |         74 |          8 |         13 |         95 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\4. Subset, Subsequence, String\Strings.java     | Java     |         41 |          1 |          4 |         46 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\4. Subset, Subsequence, String\Subsets.java     | Java     |         83 |         17 |         18 |        118 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\5. Backtracking, Maze\AllPaths.java             | Java     |         89 |          4 |         11 |        104 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\5. Backtracking, Maze\Maze.java                 | Java     |         95 |         11 |         20 |        126 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\5. Backtracking, Maze\NKnights.java             | Java     |         80 |          0 |         12 |         92 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\5. Backtracking, Maze\NQueen.java               | Java     |         52 |          4 |          9 |         65 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\5. Backtracking, Maze\Sudoku.java               | Java     |         66 |          4 |          7 |         77 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Recursion\QuestionsRecursion.java                         | Java     |         72 |         14 |         15 |        101 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Sliding Window\SlidingWindow.java                         | Java     |        758 |        167 |        135 |      1,060 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\CircularQueues.java                       | Java     |         79 |          1 |         11 |         91 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\CustomQueues.java                         | Java     |         52 |          4 |         10 |         66 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\DynamicQueues.java                        | Java     |         23 |          0 |          7 |         30 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\DynamicStacks.java                        | Java     |         19 |          1 |          4 |         24 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\Questions.java                            | Java     |        515 |        112 |         85 |        712 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\StackException.java                       | Java     |          5 |          0 |          1 |          6 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Stacks & Queues\Stacks.java                               | Java     |         58 |         26 |         15 |         99 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\AVL.java                                            | Java     |        204 |         51 |         48 |        303 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\BinarySearchTree.java                               | Java     |         75 |         16 |         24 |        115 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\Questions.java                                      | Java     |        449 |         37 |         77 |        563 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\QuestionsDFS.java                                   | Java     |        896 |        125 |        144 |      1,165 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\SegmentTree.java                                    | Java     |         74 |         22 |         19 |        115 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trees\Tree.java                                           | Java     |         71 |         63 |         18 |        152 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\Trie\CustomTrie.java                                      | Java     |        107 |          3 |         21 |        131 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\linked list\CLL.java                                      | Java     |         65 |          5 |         17 |         87 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\linked list\DLL.java                                      | Java     |         99 |         10 |         14 |        123 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\linked list\LL.java                                       | Java     |        862 |        163 |        122 |      1,147 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\linked list\LL2.java                                      | Java     |        189 |         10 |         46 |        245 |
+| c:\Users\Abdul Raffay\OneDrive - Higher Education Commission\Desktop\DSA\linked list\Recursion.java                                | Java     |         70 |          0 |         16 |         86 |
+| Total                                                                                                                              |          |      7,454 |      1,390 |      1,367 |     10,211 |
++------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
