@@ -1,3 +1,7 @@
+
+import java.util.Arrays;
+import java.util.HashSet;
+
 class BackTrackingQuestions {
     //---------------------------------------------------------------------
     // https://leetcode.com/problems/construct-smallest-number-from-di-string/
@@ -105,6 +109,22 @@ class BackTrackingQuestions {
     }
 
     //---------------------------------------------------------------------
+    // https://leetcode.com/problems/find-unique-binary-string/
+    String helper(int n, HashSet set, String s) {
+        if(s.length() == n) {
+            if(!set.contains(s)) return s;
+            return null;
+        }
+        String p = helper(n, set, s + '1');
+        if(p != null) return p;
+        return helper(n, set, s + '0');
+    }
+    public String findDifferentBinaryString(String[] nums) {
+        HashSet<String> set = new HashSet<>();
+        set.addAll(Arrays.asList(nums));
+        return helper(nums.length, set, "");   
+    }
+
     //---------------------------------------------------------------------
     //---------------------------------------------------------------------
     //---------------------------------------------------------------------
